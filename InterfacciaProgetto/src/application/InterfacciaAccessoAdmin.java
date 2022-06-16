@@ -1,0 +1,111 @@
+package application;
+
+import javafx.application.Application;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+
+public class InterfacciaAccessoAdmin extends Application {
+
+	@Override
+	public void start(Stage primaryStage) {
+		try {
+			String password= "prova";
+			String nickname= "Topolino";
+
+			VBox root= new VBox();
+			Insets spazio= new Insets(0, 0, 10, 0);
+			
+			
+			Text nabooBot= new Text("NabooBot");
+			nabooBot.setFont(Font.font("Alegreya Web Safe Font", FontPosture.ITALIC, 24));
+			nabooBot.setFill(Color.BLUE);
+			root.getChildren().add(nabooBot);
+
+			Text benvenuto= new Text("Benvenuto! Effettua il login come admin");
+			root.getChildren().add(benvenuto);
+			
+			root.setMargin(benvenuto, new Insets(40, 0, 10, 0));
+
+
+			Text t1= new Text("Inserire il nickname dell'admin");
+			TextField tf= new TextField();
+			tf.setMaxWidth(200);
+			root.getChildren().add(t1);
+			root.getChildren().add(tf);
+			root.setMargin(tf, spazio);
+			//aggiungere margini (setMargin...)
+
+			Text t2= new Text("Inserire la password");
+			PasswordField pw = new PasswordField();
+			root.setMargin(pw, spazio);
+			pw.setMaxWidth(200);
+			root.getChildren().add(t2);
+			root.getChildren().add(pw);
+
+			Button login= new Button("Login");
+			root.getChildren().add(login);
+			root.setAlignment(Pos.CENTER);
+			Text errorText= new Text("Credenziali errate: riprovare");
+			errorText.setVisible(false);
+			root.getChildren().add(errorText);
+
+			Scene scene= new Scene(root, 300, 300);
+			primaryStage.setTitle("Login admin");
+			primaryStage.setResizable(false);
+			primaryStage.setScene(scene);
+
+
+			login.setOnMouseEntered(new EventHandler<MouseEvent>(){
+				public void handle(MouseEvent arg0)
+				{
+					login.setTextFill(Color.RED);
+				}
+			});
+
+			login.setOnMouseExited(new EventHandler<MouseEvent>(){
+				public void handle(MouseEvent arg0)
+				{
+					login.setTextFill(Color.BLACK);
+				}
+			});
+
+			login.setOnMouseClicked(new EventHandler<MouseEvent>(){
+				public void handle(MouseEvent arg0)
+				{
+					if(!tf.getText().equals(nickname) || !pw.getText().equals(password)) {
+						errorText.setVisible(true);
+
+					}
+					else {
+						InterfacciaAzioni azioni= new InterfacciaAzioni(primaryStage);
+						scene.setRoot(azioni.getRoot());
+					}
+				}
+			});
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		primaryStage.show();
+
+	}
+
+	public static void main(String[] args) {
+		launch(args);
+	}
+}
