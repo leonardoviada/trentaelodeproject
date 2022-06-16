@@ -1,10 +1,15 @@
 package application;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -51,14 +56,33 @@ public class AggiungiNotiziaSuDB  {
 			inserimentoNotiziaManualmente.getChildren().add(scegliCategoria);
 			inserimentoNotiziaManualmente.setMargin(scegliCategoria, spazio);
 			
+			 ObservableList<String> names = FXCollections.observableArrayList(
+			          "categoria1", "categoria2", "categoria3");
+			 ListView<String> menuCategorie = new ListView<String>(names);
+			 inserimentoNotiziaManualmente.getChildren().add(menuCategorie);
+			 inserimentoNotiziaManualmente.setMargin(menuCategorie, spazio);
+			 menuCategorie.setMaxSize(200, 100);
+			
 			Button creaNotizia= new Button("Crea notizia");
 			inserimentoNotiziaManualmente.getChildren().add(creaNotizia);
+			Text aggiunta= new Text("Notizia aggiunta");
+			aggiunta.setVisible(false);
+			inserimentoNotiziaManualmente.getChildren().add(aggiunta);
 			
-			//handle events on click
+			creaNotizia.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+				@Override
+				public void handle(MouseEvent arg0) {
+				//crea notizia con parametri inseriti dall'utente
+					aggiunta.setVisible(true);
+					
+	
+				}
+
+			});
 			
 			inserimentoNotiziaManualmente.setAlignment(Pos.CENTER);
 			
-			//inserire menu a tendina con scelta categoria da enum
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

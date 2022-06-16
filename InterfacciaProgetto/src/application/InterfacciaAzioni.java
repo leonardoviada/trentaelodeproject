@@ -31,8 +31,6 @@ public class InterfacciaAzioni {
 			elencoAzioni.getChildren().add(aggiungiNotiziaSuDB);
 			elencoAzioni.setMargin(aggiungiNotiziaSuDB, spazio);
 			
-			
-			
 
 			Button rimuoviNotiziaDaDB= new Button("Rimuovi manualmente notizia dal Database");
 			elencoAzioni.getChildren().add(rimuoviNotiziaDaDB);
@@ -85,8 +83,7 @@ public class InterfacciaAzioni {
 				@Override
 				public void handle(MouseEvent arg0) {
 					AggiungiNotiziaSuDB aggiungi= new AggiungiNotiziaSuDB(primaryStage);
-					//Scene scene1= new Scene(aggiungi.getRoot(), 300, 300);
-					//primaryStage.setScene(scene1);
+			
 					scene.setRoot(aggiungi.getRoot());
 				}
 
@@ -96,9 +93,20 @@ public class InterfacciaAzioni {
 
 				@Override
 				public void handle(MouseEvent arg0) {
-					//AggiungiNotiziaSuDB aggiungi= new AggiungiNotiziaSuDB(primaryStage);
-					//Scene scene1= new Scene(aggiungi.getRoot(), 300, 300);
-					//primaryStage.setScene(scene1);
+					RimuoviNotiziaDaDB rimuovi= new RimuoviNotiziaDaDB(primaryStage);
+					scene.setRoot(rimuovi.getRoot());
+					
+	
+				}
+
+			});
+			
+			importaNotizieDaFile.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+				@Override
+				public void handle(MouseEvent arg0) {
+					ImportaNotizieDaFile importaNotizie= new ImportaNotizieDaFile(primaryStage);
+					scene.setRoot(importaNotizie.getRoot());
 					
 	
 				}
