@@ -3,7 +3,7 @@ package application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
+
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
@@ -19,20 +19,18 @@ public class RimuoviNotiziaDaDB{
 	RimuoviNotiziaDaDB(Stage primaryStage){
 		root= new VBox();
 		root.setAlignment(Pos.CENTER);
-		Insets spazio= new Insets(0, 0, 7.5, 0);
+		root.setSpacing(7.5);
 		
 		Text seleziona1= new Text("Seleziona la notizia che vuoi rimuovere.");
 		root.getChildren().add(seleziona1);
-		root.setMargin(seleziona1, spazio);
 		Text seleziona2= new Text("Di seguito mostrati i titoli delle notizie disponibili:");
 		root.getChildren().add(seleziona2);
-		root.setMargin(seleziona2, spazio);
 		
 		
 		
-		ObservableList<String> names = FXCollections.observableArrayList(
+		ObservableList<String> titoli = FXCollections.observableArrayList(
 		          "titolo1", "titolo2", "titolo3");
-		 ListView<String> menuNotizie = new ListView<String>(names);
+		 ListView<String> menuNotizie = new ListView<String>(titoli);
 		 root.getChildren().add(menuNotizie);
 		 menuNotizie.setEditable(true);
 		 menuNotizie.setMaxSize(200, 150);
@@ -50,7 +48,8 @@ public class RimuoviNotiziaDaDB{
 				@Override
 				public void handle(MouseEvent arg0) {
 					
-					names.remove(menuNotizie.getEditingIndex());
+					String notiziaDaRimuovere = menuNotizie.getSelectionModel().getSelectedItem();
+					titoli.remove(notiziaDaRimuovere);
 					rimossa.setVisible(true);
 				}
 

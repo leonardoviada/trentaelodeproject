@@ -18,25 +18,25 @@ import javafx.stage.Stage;
 public class ImportaNotizieDaFile{
 
 	private final VBox root;
-	
+
 	ImportaNotizieDaFile(Stage primaryStage){
-		
-		Insets spazio = new Insets(0, 0, 7.5, 0);
+
+
 		root= new VBox();
 		root.setAlignment(Pos.CENTER);
-		
+		root.setSpacing(7.5);
+
 		Text inserisciFile= new Text("Inserire percorso del file da cui si vuole importare notizie");
 		root.getChildren().add(inserisciFile);
-		root.setMargin(inserisciFile, spazio);
-		
+	
+
 		TextField tf= new TextField();
 		tf.setMaxWidth(200);
-		root.setMargin(tf, spazio);
 		root.getChildren().add(tf);
-		
+
 		Button importa= new Button("Importa");
 		root.getChildren().add(importa);
-		
+
 		Text errore= new Text("Errore nell'apertura del file, riprovare");
 		root.getChildren().add(errore);
 		errore.setVisible(false);
@@ -49,20 +49,22 @@ public class ImportaNotizieDaFile{
 					Scanner scan= new Scanner(file);
 					while(scan.hasNextLine()) {
 						//crea notizie dal file
-						
+
 					}
-				} catch (FileNotFoundException e) {
+					scan.close();
+				} 
+				catch (FileNotFoundException e) {
 					errore.setVisible(true);
 					e.printStackTrace();
 				}
 			}
 
 		});
-		
-		
-		
+
+
+
 	}
-	
+
 	public VBox getRoot() {
 		return root;
 	}

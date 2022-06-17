@@ -16,58 +16,50 @@ import javafx.stage.Stage;
 
 public class AggiungiNotiziaSuDB  {
 
-	private final VBox inserimentoNotiziaManualmente;
+	private final VBox root;
 
 	AggiungiNotiziaSuDB(Stage primaryStage){
 		//textfield con il testo della notizia da aggiungere
-		inserimentoNotiziaManualmente= new VBox();
+		root= new VBox();
+		root.setSpacing(7.5);
 		
 		try {
-			Insets spazio= new Insets(0,0,10,0);
 
 			Text inserisciTitolo= new Text("Inserisci il titolo della notizia");
-			inserimentoNotiziaManualmente.getChildren().add(inserisciTitolo);
-			inserimentoNotiziaManualmente.setMargin(inserisciTitolo, spazio);
+			root.getChildren().add(inserisciTitolo);
 			
 			TextField campoTitolo= new TextField();
 			campoTitolo.setMaxWidth(200);
-			inserimentoNotiziaManualmente.getChildren().add(campoTitolo);
-			inserimentoNotiziaManualmente.setMargin(campoTitolo, spazio);
+			root.getChildren().add(campoTitolo);
 			
 			Text inserisciCorpo= new Text("Inserisci il corpo della notizia");
-			inserimentoNotiziaManualmente.getChildren().add(inserisciCorpo);
-			inserimentoNotiziaManualmente.setMargin(inserisciCorpo, spazio);
+			root.getChildren().add(inserisciCorpo);
 			
 			TextField campoCorpo= new TextField();
 			campoCorpo.setMaxWidth(200);
-			inserimentoNotiziaManualmente.getChildren().add(campoCorpo);
-			inserimentoNotiziaManualmente.setMargin(campoCorpo, spazio);
+			root.getChildren().add(campoCorpo);
 			
 			Text inserisciFonte= new Text("Inserisci la fonte della notizia");
-			inserimentoNotiziaManualmente.getChildren().add(inserisciFonte);
-			inserimentoNotiziaManualmente.setMargin(inserisciFonte, spazio);
+			root.getChildren().add(inserisciFonte);
 			
 			TextField campoFonte= new TextField();
 			campoFonte.setMaxWidth(200);
-			inserimentoNotiziaManualmente.getChildren().add(campoFonte);
-			inserimentoNotiziaManualmente.setMargin(campoFonte, spazio);
+			root.getChildren().add(campoFonte);
 			
 			Text scegliCategoria= new Text("Scegli la categoria di appartenenza della notizia");
-			inserimentoNotiziaManualmente.getChildren().add(scegliCategoria);
-			inserimentoNotiziaManualmente.setMargin(scegliCategoria, spazio);
+			root.getChildren().add(scegliCategoria);
 			
 			 ObservableList<String> names = FXCollections.observableArrayList(
 			          "categoria1", "categoria2", "categoria3");
 			 ListView<String> menuCategorie = new ListView<String>(names);
-			 inserimentoNotiziaManualmente.getChildren().add(menuCategorie);
-			 inserimentoNotiziaManualmente.setMargin(menuCategorie, spazio);
+			 root.getChildren().add(menuCategorie);
 			 menuCategorie.setMaxSize(200, 100);
 			
 			Button creaNotizia= new Button("Crea notizia");
-			inserimentoNotiziaManualmente.getChildren().add(creaNotizia);
+			root.getChildren().add(creaNotizia);
 			Text aggiunta= new Text("Notizia aggiunta");
 			aggiunta.setVisible(false);
-			inserimentoNotiziaManualmente.getChildren().add(aggiunta);
+			root.getChildren().add(aggiunta);
 			
 			creaNotizia.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
@@ -81,11 +73,11 @@ public class AggiungiNotiziaSuDB  {
 
 			});
 			
-			inserimentoNotiziaManualmente.setAlignment(Pos.CENTER);
+			root.setAlignment(Pos.CENTER);
 			
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
@@ -100,7 +92,7 @@ public class AggiungiNotiziaSuDB  {
 	}
 	
 	public VBox getRoot() {
-		return inserimentoNotiziaManualmente;
+		return root;
 	}
 	
 

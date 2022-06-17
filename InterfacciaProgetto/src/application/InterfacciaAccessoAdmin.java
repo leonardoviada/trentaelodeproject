@@ -23,8 +23,8 @@ public class InterfacciaAccessoAdmin extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			String password= "prova";
-			String nickname= "Topolino";
+			String password= "aaa";
+			String nickname= "aaa";
 
 			VBox root= new VBox();
 			Insets spazio= new Insets(0, 0, 10, 0);

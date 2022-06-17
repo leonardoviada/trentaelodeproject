@@ -1,16 +1,12 @@
 package application;
 
-import javafx.application.Application;
 import javafx.stage.Stage;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.event.*;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 
 
@@ -20,57 +16,46 @@ public class InterfacciaAzioni {
 
 	public InterfacciaAzioni(Stage primaryStage) {
 		elencoAzioni= new VBox();
+		Text errore= new Text("Errore nell'eseguire una delle azioni, riprovare");
+		errore.setVisible(false);
+		elencoAzioni.getChildren().add(errore);
 		try {
-			Insets spazio= new Insets(0,0,7.5,0);
+			elencoAzioni.setSpacing(7.5);
 
 			Text title= new Text("Benvenuto! Queste sono le azioni disponibili");
 			elencoAzioni.getChildren().add(title);
-			elencoAzioni.setMargin(title, spazio);
+			
 
 			Button aggiungiNotiziaSuDB= new Button("Aggiungi manualmente notizia sul Database");
 			elencoAzioni.getChildren().add(aggiungiNotiziaSuDB);
-			elencoAzioni.setMargin(aggiungiNotiziaSuDB, spazio);
+			
 			
 
 			Button rimuoviNotiziaDaDB= new Button("Rimuovi manualmente notizia dal Database");
 			elencoAzioni.getChildren().add(rimuoviNotiziaDaDB);
-			elencoAzioni.setMargin(rimuoviNotiziaDaDB, spazio);
-			
-			//aggiungi gestione eventi
 
 			Button importaNotizieDaFile= new Button("Importa notizie da file");
 			elencoAzioni.getChildren().add(importaNotizieDaFile);
-			elencoAzioni.setMargin(importaNotizieDaFile, spazio);
-			
-			//aggiungi gestione eventi
 			
 			Button importaNotizieDaFeed= new Button("Importa notizie da Feed RSS");
 			elencoAzioni.getChildren().add(importaNotizieDaFeed);
-			elencoAzioni.setMargin(importaNotizieDaFeed, spazio);
 
 			Button inviaMessaggioAUtenti= new Button("Manda messaggio tramite telegram a tutti gli utenti");
 			elencoAzioni.getChildren().add(inviaMessaggioAUtenti);
-			elencoAzioni.setMargin(inviaMessaggioAUtenti, spazio);
 
 			Button assegnaCategoriaANotizia= new Button("Assegna una categoria a una notizia");
 			elencoAzioni.getChildren().add(assegnaCategoriaANotizia);
-			elencoAzioni.setMargin(assegnaCategoriaANotizia, spazio);
 
 			Button esportaNotizieSuFile= new Button("Esporta solo le notizie che ti interessano su un file");
 			elencoAzioni.getChildren().add(esportaNotizieSuFile);
-			elencoAzioni.setMargin(esportaNotizieSuFile, spazio);
 
 			Button modificaProfiliUtenti= new Button("Modifica, crea o elimina profili degli utenti");
 			elencoAzioni.getChildren().add(modificaProfiliUtenti);
-			elencoAzioni.setMargin(modificaProfiliUtenti, spazio);
 
 			Button rimuoviCommentiUtenti= new Button("Rimuovi commenti");
 			elencoAzioni.getChildren().add(rimuoviCommentiUtenti);
-			elencoAzioni.setMargin(rimuoviCommentiUtenti, spazio);
-
 
 			elencoAzioni.setAlignment(Pos.CENTER);
-
 
 			Scene scene = new Scene(elencoAzioni,400,400);
 			primaryStage.setTitle("Interfaccia Admin");
@@ -82,8 +67,8 @@ public class InterfacciaAzioni {
 
 				@Override
 				public void handle(MouseEvent arg0) {
+	
 					AggiungiNotiziaSuDB aggiungi= new AggiungiNotiziaSuDB(primaryStage);
-			
 					scene.setRoot(aggiungi.getRoot());
 				}
 
@@ -95,8 +80,6 @@ public class InterfacciaAzioni {
 				public void handle(MouseEvent arg0) {
 					RimuoviNotiziaDaDB rimuovi= new RimuoviNotiziaDaDB(primaryStage);
 					scene.setRoot(rimuovi.getRoot());
-					
-	
 				}
 
 			});
@@ -105,9 +88,50 @@ public class InterfacciaAzioni {
 
 				@Override
 				public void handle(MouseEvent arg0) {
-					ImportaNotizieDaFile importaNotizie= new ImportaNotizieDaFile(primaryStage);
-					scene.setRoot(importaNotizie.getRoot());
-					
+					ImportaNotizieDaFile importaNotizieDaFile= new ImportaNotizieDaFile(primaryStage);
+					scene.setRoot(importaNotizieDaFile.getRoot());
+				}
+
+			});
+			
+			importaNotizieDaFeed.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+				@Override
+				public void handle(MouseEvent arg0) {
+					ImportaNotizieDaFeed importaNotizieDaFeed= new ImportaNotizieDaFeed(primaryStage);
+					scene.setRoot(importaNotizieDaFeed.getRoot());
+				}
+
+			});
+			
+			inviaMessaggioAUtenti.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+				@Override
+				public void handle(MouseEvent arg0) {
+					InviaMessaggioAUtenti inviaMessaggio= new InviaMessaggioAUtenti(primaryStage);
+					scene.setRoot(inviaMessaggio.getRoot());
+				}
+
+			});
+			
+			assegnaCategoriaANotizia.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+				@Override
+				public void handle(MouseEvent arg0) {
+					AssegnaCategoriaANotizia assegnaCategoria = new AssegnaCategoriaANotizia(primaryStage);
+					scene.setRoot(assegnaCategoria.getRoot());
+	
+				}
+
+			});
+			
+			
+			esportaNotizieSuFile.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+				@Override
+				public void handle(MouseEvent arg0) {
+					EsportaNotizieSuFile esporta= new EsportaNotizieSuFile(primaryStage);
+					scene.setRoot(esporta.getRoot());
 	
 				}
 
@@ -115,7 +139,7 @@ public class InterfacciaAzioni {
 			
 			primaryStage.show();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			errore.setVisible(true);
 			e.printStackTrace();
 		}
 		
