@@ -24,7 +24,7 @@ public class SelezionaNotizia{
 
 		//Mostra elenco notizie da database
 		
-		ObservableList<News> notizie = FXCollections.observableArrayList();
+		ObservableList<News> notizie = FXCollections.observableArrayList();  //elenco delle notizie disponibili
 		ListView<News> elencoNotizie = new ListView<News>(notizie);
 		elencoNotizie.setEditable(true);
 		elencoNotizie.setMaxSize(200, 150);
@@ -47,7 +47,7 @@ public class SelezionaNotizia{
 			public void handle(MouseEvent arg0) {
 				
 				SelezionaCommentoDaRimuovere rimuoviCommento= new SelezionaCommentoDaRimuovere(primaryStage, elencoNotizie.getSelectionModel().getSelectedItem());
-				
+				primaryStage.getScene().setRoot(rimuoviCommento.getRoot());
 			}
 
 		});
