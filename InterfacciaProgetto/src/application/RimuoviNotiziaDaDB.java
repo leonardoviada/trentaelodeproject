@@ -29,7 +29,8 @@ public class RimuoviNotiziaDaDB{
 		
 		
 		ObservableList<String> titoli = FXCollections.observableArrayList(
-		          "titolo1", "titolo2", "titolo3");
+		          "titolo1", "titolo2", "titolo3"
+		          /*titoli delle notizie nel database*/);
 		 ListView<String> menuNotizie = new ListView<String>(titoli);
 		 root.getChildren().add(menuNotizie);
 		 menuNotizie.setEditable(true);
@@ -50,15 +51,24 @@ public class RimuoviNotiziaDaDB{
 					
 					String notiziaDaRimuovere = menuNotizie.getSelectionModel().getSelectedItem();
 					titoli.remove(notiziaDaRimuovere);
+					//rimuovi notizia dal database
 					rimossa.setVisible(true);
 				}
 
 			});
-		 
-		
-		//quando il bottone viene premuto cambia la scena in "Notizia elimiiata"
-		
-		
+			
+			Button tornaIndietro= new Button("Torna al menu iniziale");
+			root.getChildren().add(tornaIndietro);
+
+			tornaIndietro.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+				@Override
+				public void handle(MouseEvent arg0) {	
+					InterfacciaAzioni interfaccia= new InterfacciaAzioni(primaryStage);
+					primaryStage.getScene().setRoot(interfaccia.getRoot());
+
+				}
+			});
 	}
 
 	public VBox getRoot() {

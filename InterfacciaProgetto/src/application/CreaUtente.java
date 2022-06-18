@@ -9,37 +9,40 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class InviaMessaggioAUtenti{
+public class CreaUtente {
 	private final VBox root;
 
-	InviaMessaggioAUtenti(Stage primaryStage){
+	CreaUtente(Stage primaryStage, GenericUserList listaUtenti){
 		root= new VBox();
 		root.setAlignment(Pos.CENTER);
 		root.setSpacing(7.5);
 
-		Text inserisciMessaggio= new Text("Inserisci il messaggio da inviare agli utenti");
-		root.getChildren().add(inserisciMessaggio);
+		Text inserisciNickname= new Text("Inserire il nickname dell'utente da creare");
+		root.getChildren().add(inserisciNickname);
 
-		TextField campoMessaggio= new TextField();
-		campoMessaggio.setMaxWidth(200);
-		root.getChildren().add(campoMessaggio);
+		TextField tf= new TextField();
+		tf.setMaxWidth(200);
+		root.getChildren().add(tf);
 
-		Button inviaMessaggio= new Button("Invia Messaggio");
-		root.getChildren().add(inviaMessaggio);
+		Button bottoneCrea= new Button("Crea utente");
+		root.getChildren().add(bottoneCrea);
 
-		Text messaggioInviato= new Text("Messaggio inviato");
-		root.getChildren().add(messaggioInviato);
-		messaggioInviato.setVisible(false);
-		
-		inviaMessaggio.setOnMouseClicked(new EventHandler<MouseEvent>() {
+		Text aggiunto= new Text("Utente creato");
+		root.getChildren().add(aggiunto);
+		aggiunto.setVisible(false);
+
+
+		bottoneCrea.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent arg0) {
-				//invia messaggio a utenti
-				messaggioInviato.setVisible(true);
+				listaUtenti.getUserList().put(tf.getText(), new User(tf.getText()));
+				aggiunto.setVisible(true);
+
 			}
+
 		});
-		
+
 		Button tornaIndietro= new Button("Torna al menu iniziale");
 		root.getChildren().add(tornaIndietro);
 
@@ -52,10 +55,11 @@ public class InviaMessaggioAUtenti{
 
 			}
 		});
-
 	}
 
 	public VBox getRoot() {
 		return root;
 	}
+
+
 }

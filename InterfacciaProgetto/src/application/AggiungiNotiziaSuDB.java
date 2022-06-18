@@ -1,5 +1,7 @@
 package application;
 
+import java.util.Date;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -21,6 +23,7 @@ public class AggiungiNotiziaSuDB  {
 	AggiungiNotiziaSuDB(Stage primaryStage){
 		//textfield con il testo della notizia da aggiungere
 		root= new VBox();
+		root.setAlignment(Pos.CENTER);
 		root.setSpacing(7.5);
 		
 		try {
@@ -49,9 +52,9 @@ public class AggiungiNotiziaSuDB  {
 			Text scegliCategoria= new Text("Scegli la categoria di appartenenza della notizia");
 			root.getChildren().add(scegliCategoria);
 			
-			 ObservableList<String> names = FXCollections.observableArrayList(
+			 ObservableList<String> categorie = FXCollections.observableArrayList(
 			          "categoria1", "categoria2", "categoria3");
-			 ListView<String> menuCategorie = new ListView<String>(names);
+			 ListView<String> menuCategorie = new ListView<String>(categorie);
 			 root.getChildren().add(menuCategorie);
 			 menuCategorie.setMaxSize(200, 100);
 			
@@ -64,9 +67,28 @@ public class AggiungiNotiziaSuDB  {
 			creaNotizia.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 				@Override
-				public void handle(MouseEvent arg0) {
-				//crea notizia con parametri inseriti dall'utente
+				public void handle(MouseEvent arg0) {	
+					News notizia= new News(123, campoTitolo.getText(), campoCorpo.getText(), campoFonte.getText(), new Date(2022, 06, 17));
+					//aggiungi notizia al database
 					aggiunta.setVisible(true);
+					
+	
+				}
+
+			});
+			
+			Button tornaIndietro= new Button("Torna al menu iniziale");
+			root.getChildren().add(tornaIndietro);
+			
+			
+			
+			
+			tornaIndietro.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+				@Override
+				public void handle(MouseEvent arg0) {	
+					InterfacciaAzioni interfaccia= new InterfacciaAzioni(primaryStage);
+					primaryStage.getScene().setRoot(interfaccia.getRoot());
 					
 	
 				}

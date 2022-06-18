@@ -70,6 +70,19 @@ public class EsportaNotizieSuFile{
 			}
 
 		});
+		
+		Button tornaIndietro= new Button("Torna al menu iniziale");
+		root.getChildren().add(tornaIndietro);
+
+		tornaIndietro.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent arg0) {	
+				InterfacciaAzioni interfaccia= new InterfacciaAzioni(primaryStage);
+				primaryStage.getScene().setRoot(interfaccia.getRoot());
+
+			}
+		});
 
 	}
 

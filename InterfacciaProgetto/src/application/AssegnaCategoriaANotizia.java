@@ -15,7 +15,6 @@ public class AssegnaCategoriaANotizia{
 
 	AssegnaCategoriaANotizia(Stage primaryStage){
 		root= new VBox();
-
 		root.setSpacing(7.5);
 		root.setAlignment(Pos.CENTER);
 
@@ -58,6 +57,19 @@ public class AssegnaCategoriaANotizia{
 
 			}
 
+		});
+		
+		Button tornaIndietro= new Button("Torna al menu iniziale");
+		root.getChildren().add(tornaIndietro);
+
+		tornaIndietro.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent arg0) {	
+				InterfacciaAzioni interfaccia= new InterfacciaAzioni(primaryStage);
+				primaryStage.getScene().setRoot(interfaccia.getRoot());
+
+			}
 		});
 	}
 

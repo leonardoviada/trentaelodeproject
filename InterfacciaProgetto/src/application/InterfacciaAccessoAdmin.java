@@ -22,90 +22,85 @@ public class InterfacciaAccessoAdmin extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
-		try {
-			String password= "aaa";
-			String nickname= "aaa";
+		String password= "aaa";
+		String nickname= "aaa";
 
-			VBox root= new VBox();
-			Insets spazio= new Insets(0, 0, 10, 0);
-			
-			
-			Text nabooBot= new Text("NabooBot");
-			nabooBot.setFont(Font.font("Alegreya Web Safe Font", FontPosture.ITALIC, 24));
-			nabooBot.setFill(Color.BLUE);
-			root.getChildren().add(nabooBot);
-
-			Text benvenuto= new Text("Benvenuto! Effettua il login come admin");
-			root.getChildren().add(benvenuto);
-			
-			root.setMargin(benvenuto, new Insets(40, 0, 10, 0));
+		VBox root= new VBox();
+		root.setSpacing(7.5);
 
 
-			Text t1= new Text("Inserire il nickname dell'admin");
-			TextField tf= new TextField();
-			tf.setMaxWidth(200);
-			root.getChildren().add(t1);
-			root.getChildren().add(tf);
-			root.setMargin(tf, spazio);
-			//aggiungere margini (setMargin...)
+		Text nabooBot= new Text("NabooBot");
+		nabooBot.setFont(Font.font("Alegreya Web Safe Font", FontPosture.ITALIC, 24));
+		nabooBot.setFill(Color.BLUE);
+		root.getChildren().add(nabooBot);
 
-			Text t2= new Text("Inserire la password");
-			PasswordField pw = new PasswordField();
-			root.setMargin(pw, spazio);
-			pw.setMaxWidth(200);
-			root.getChildren().add(t2);
-			root.getChildren().add(pw);
+		Text benvenuto= new Text("Benvenuto! Effettua il login come admin");
+		root.getChildren().add(benvenuto);
 
-			Button login= new Button("Login");
-			root.getChildren().add(login);
-			root.setAlignment(Pos.CENTER);
-			Text errorText= new Text("Credenziali errate: riprovare");
-			errorText.setVisible(false);
-			root.getChildren().add(errorText);
-
-			Scene scene= new Scene(root, 300, 300);
-			primaryStage.setTitle("Login admin");
-			primaryStage.setResizable(false);
-			primaryStage.setScene(scene);
+		root.setMargin(benvenuto, new Insets(40, 0, 10, 0));
 
 
-			login.setOnMouseEntered(new EventHandler<MouseEvent>(){
-				public void handle(MouseEvent arg0)
-				{
-					login.setTextFill(Color.RED);
+		Text t1= new Text("Inserire il nickname dell'admin");
+		TextField tf= new TextField();
+		tf.setMaxWidth(200);
+		root.getChildren().add(t1);
+		root.getChildren().add(tf);
+
+		Text t2= new Text("Inserire la password");
+		PasswordField pw = new PasswordField();
+		pw.setMaxWidth(200);
+		root.getChildren().add(t2);
+		root.getChildren().add(pw);
+
+		Button login= new Button("Login");
+		root.getChildren().add(login);
+		root.setAlignment(Pos.CENTER);
+		Text errorText= new Text("Credenziali errate: riprovare");
+		errorText.setVisible(false);
+		root.getChildren().add(errorText);
+
+		Scene scene= new Scene(root, 300, 300);
+		primaryStage.setTitle("Login admin");
+		primaryStage.setResizable(false);
+		primaryStage.setScene(scene);
+
+
+		login.setOnMouseEntered(new EventHandler<MouseEvent>(){
+			public void handle(MouseEvent arg0)
+			{
+				login.setTextFill(Color.RED);
+			}
+		});
+
+		login.setOnMouseExited(new EventHandler<MouseEvent>(){
+			public void handle(MouseEvent arg0)
+			{
+				login.setTextFill(Color.BLACK);
+			}
+		});
+
+		login.setOnMouseClicked(new EventHandler<MouseEvent>(){
+			public void handle(MouseEvent arg0)
+			{
+				if(!tf.getText().equals(nickname) || !pw.getText().equals(password)) {
+					errorText.setVisible(true);
+
 				}
-			});
-
-			login.setOnMouseExited(new EventHandler<MouseEvent>(){
-				public void handle(MouseEvent arg0)
-				{
-					login.setTextFill(Color.BLACK);
+				else {
+					InterfacciaAzioni azioni= new InterfacciaAzioni(primaryStage);
+					scene.setRoot(azioni.getRoot());
 				}
-			});
-
-			login.setOnMouseClicked(new EventHandler<MouseEvent>(){
-				public void handle(MouseEvent arg0)
-				{
-					if(!tf.getText().equals(nickname) || !pw.getText().equals(password)) {
-						errorText.setVisible(true);
-
-					}
-					else {
-						InterfacciaAzioni azioni= new InterfacciaAzioni(primaryStage);
-						scene.setRoot(azioni.getRoot());
-					}
-				}
-			});
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+			}
+		});
 		primaryStage.show();
+	} 
 
-	}
+	
 
-	public static void main(String[] args) {
-		launch(args);
-	}
+
+
+
+public static void main(String[] args) {
+	launch(args);
+}
 }

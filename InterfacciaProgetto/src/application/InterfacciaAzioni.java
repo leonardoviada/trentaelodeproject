@@ -29,8 +29,6 @@ public class InterfacciaAzioni {
 			Button aggiungiNotiziaSuDB= new Button("Aggiungi manualmente notizia sul Database");
 			elencoAzioni.getChildren().add(aggiungiNotiziaSuDB);
 			
-			
-
 			Button rimuoviNotiziaDaDB= new Button("Rimuovi manualmente notizia dal Database");
 			elencoAzioni.getChildren().add(rimuoviNotiziaDaDB);
 
@@ -49,9 +47,15 @@ public class InterfacciaAzioni {
 			Button esportaNotizieSuFile= new Button("Esporta solo le notizie che ti interessano su un file");
 			elencoAzioni.getChildren().add(esportaNotizieSuFile);
 
-			Button modificaProfiliUtenti= new Button("Modifica, crea o elimina profili degli utenti");
-			elencoAzioni.getChildren().add(modificaProfiliUtenti);
-
+			Button modificaNicknameUtenti= new Button("Modifica profili degli utenti");
+			elencoAzioni.getChildren().add(modificaNicknameUtenti);
+			
+			Button creaUtenti= new Button("Crea nuovi utenti");
+			elencoAzioni.getChildren().add(creaUtenti);
+			
+			Button rimuoviUtenti= new Button("Elimina utenti");
+			elencoAzioni.getChildren().add(rimuoviUtenti);
+			
 			Button rimuoviCommentiUtenti= new Button("Rimuovi commenti");
 			elencoAzioni.getChildren().add(rimuoviCommentiUtenti);
 
@@ -136,6 +140,37 @@ public class InterfacciaAzioni {
 				}
 
 			});
+			
+			modificaNicknameUtenti.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+				@Override
+				public void handle(MouseEvent arg0) {
+					SelezionaUtenteDaModificare modificaUtente= new SelezionaUtenteDaModificare(primaryStage);
+					scene.setRoot(modificaUtente.getRoot());
+				}
+
+			});
+			
+			rimuoviUtenti.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+				@Override
+				public void handle(MouseEvent arg0) {
+					SelezionaUtenteDaRimuovere rimuoviUtente= new SelezionaUtenteDaRimuovere(primaryStage);
+					scene.setRoot(rimuoviUtente.getRoot());
+				}
+
+			});
+			
+			creaUtenti.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+				@Override
+				public void handle(MouseEvent arg0) {
+					CreaUtente creaUtente= new CreaUtente(primaryStage, new GenericUserList());
+					scene.setRoot(creaUtente.getRoot());
+				}
+			});
+			
+			
 			
 			primaryStage.show();
 		} catch (Exception e) {
