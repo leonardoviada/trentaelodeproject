@@ -1,3 +1,10 @@
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.lang.reflect.Type;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -5,7 +12,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class News {
-    private long id;
+    private int id;
     private String author;
     private String title;
     private String body;
@@ -17,7 +24,7 @@ public class News {
     private ArrayList<Double> rating; //rating della notizia da 0 a 10
 
     //costruttore minimale
-    public News(long id, String author, String title, String body, Date dateTime) {
+    public News(int id, String author, String title, String body, Date dateTime) {
         this.id = id;
         this.author = author;
         this.title = title;
@@ -28,7 +35,7 @@ public class News {
     }
 
     //costruttore completo
-    public News(long id, String author, String title, String body, String source, String link, Categories category, Date dateTime) {
+    public News(int id, String author, String title, String body, String source, String link, Categories category, Date dateTime) {
         this.id = id;
         this.author = author;
         this.title = title;
@@ -41,11 +48,11 @@ public class News {
         comments = new HashMap<Integer, Comment>();
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -144,4 +151,32 @@ public class News {
        String text = this.title.toUpperCase()+"\n"+this.body+"\n\nAuthor: "+this.author+"\nDate: "+strDate+"\nSource: "+this.getSource()+"\n\nLeggi la notizia completa su "+this.getLink()+"\n\nRating: "+this.ratingValue()+"\nCategoria: "+category.toString()+"\nID: "+this.getId();
        return text;
    }
+
+    public String toJson()
+    {
+        Gson gson = new Gson();
+        Type fooType = new TypeToken<News>() {}.getType();
+        String json = gson.toJson(this,fooType);
+        return json;
+    }
+
+
+
+    public void writeOnFIle(String json, String path){
+        FileWriter fw = null;
+        PrintWriter pw = null;
+        try{
+            fw = new FileWriter(path,true); //true per fare append, false o niente per sovrascrivere
+            pw = new PrintWriter(fw);
+            pw.println(json);
+        } catch (IOException e) {
+            System.out.println("Percorso file non valido");
+        }
+        finally{
+            try{
+                fw.close();
+            } catch (IOException e){System.out.println("Errore di chiusura");}
+            pw.close();
+        }
+    }
 }

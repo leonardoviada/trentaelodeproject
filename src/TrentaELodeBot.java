@@ -1,9 +1,25 @@
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.sun.syndication.io.FeedException;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+
+import java.io.*;
+import java.lang.reflect.Type;
+import java.net.MalformedURLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+
+import java.net.URL;
+import java.util.Iterator;
+import com.sun.syndication.feed.synd.SyndEntry;
+import com.sun.syndication.feed.synd.SyndFeed;
+import com.sun.syndication.io.SyndFeedInput;
+import com.sun.syndication.io.XmlReader;
 
 public class TrentaELodeBot extends TelegramLongPollingBot {
 
@@ -136,23 +152,80 @@ public class TrentaELodeBot extends TelegramLongPollingBot {
     }
 
 
+    //DA SISTEMARE CON FEED RSS
 
     public ArrayList<News> getNewsByCategory(Categories c){
+        ArrayList<News> newsList = new ArrayList<News>();
+        BufferedReader br = null;
+        FileReader fr = null;
+            try {
+                fr = new FileReader(c.label);
+                br = new BufferedReader(fr);
+                String line = br.readLine();
+                while(line!=null) {
+                    newsList.add(fromJson(line));
+                    line = br.readLine();
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
 
-        //provvisorio solo per test ATTENZIONE
-        ArrayList<News> list = new ArrayList<News>();
-        String link = "https://www.ilfattoquotidiano.it/2022/06/17/gazprom-continua-a-far-pressione-sullue-a-eni-meta-delle-forniture-richieste-bloomberg-se-si-ferma-nord-stream-1-inverno-a-rischio/6630143/";
-
-        list.add(new News(1234, "Pipo","cronaca di oggi","fvfsavfavvfav\ndfvsvdsfv", "Ansa", link,Categories.LATEST_NEWS,new Date(System.currentTimeMillis())));
-        list.add(new News(3472, "Lollo","auto e moto","fvfsavfavvfav\ndfvsvdsfv", "Ansa", link,Categories.ECONOMY,new Date(System.currentTimeMillis())));
-        list.add(new News(5032, "Mario","cinema stasera","fvfsavfavvfav\ndfvsvdsfv", "La Stampa", link,Categories.SHOW,new Date(System.currentTimeMillis())));
-
-        return list;
+            return newsList;
     }
 
     public News getNewsById(long id){
         String link = "https://www.ilfattoquotidiano.it/2022/06/17/gazprom-continua-a-far-pressione-sullue-a-eni-meta-delle-forniture-richieste-bloomberg-se-si-ferma-nord-stream-1-inverno-a-rischio/6630143/";
         News n = new News(5032, "Mario","cinema stasera","fvfsavfavvfav\ndfvsvdsfv", "Ansa", link,Categories.LATEST_NEWS,new Date(System.currentTimeMillis()));
         return n;
+    }
+
+    public News fromJson(String json) {
+        Gson gson = new Gson();
+        Type fooType = new TypeToken<News>() {}.getType();
+        News n = gson.fromJson(json,fooType);
+        return n;
+    }
+
+    public void persistFeedRSS(String myUrl, Categories cat, String path) {
+        URL url = null;
+        XmlReader reader = null;
+        FileWriter fw = null;
+        PrintWriter pw = null;
+        News news = null;
+
+        try {
+           url = new URL(myUrl);
+           reader = new XmlReader(url);
+           SyndFeed feed = new SyndFeedInput().build(reader);
+            fw = new FileWriter(new File(path)); //true per fare append, false o niente per sovrascrivere
+            pw = new PrintWriter(fw);
+
+            for (Iterator<SyndEntry> i = feed.getEntries().iterator(); i.hasNext();) {
+                //Iteriamo tutte le voci presenti nel nostro feed e ne stampiano le proprietà fondmentali
+                SyndEntry entry = i.next();
+                news = new News(entry.hashCode(), entry.getAuthor(), entry.getTitle(), entry.getDescription().getValue(), "Feed RSS", entry.getLink(), cat, entry.getPublishedDate());
+                pw.println(news.toJson());
+            }
+        } catch (MalformedURLException exc){
+            System.out.println("Attenzione, URL non valido");
+        } catch (IOException exc){
+                System.out.println("Attenzione, errore nella lettura xml");
+        } catch (IllegalArgumentException exc){
+            System.out.println("Attenzione, errore nella lettura feed RSS 1");
+        } catch (FeedException fexc){
+            System.out.println("Attenzione, errore nella lettura feed RSS");
+        }
+        finally {
+            //Chiudiamo lo stream precedentemente aperto.
+            if (reader != null) {
+                try {
+                    fw.close();
+                    pw.close();
+                    reader.close();
+                } catch (IOException e) {
+                    System.out.println("Attenzione, errore nella chiusura del reader Feed RSS");
+                }
+            }
+        }
     }
 }
