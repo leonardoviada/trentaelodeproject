@@ -17,7 +17,7 @@ public class UserList{
         this.path = path;
         update();
     }
-    // prenda dal DB l'elenco degli utenti e riempia userList
+    // prende dal DB l'elenco degli utenti e riempia userMap<username,User>
     public void update(){
         Gson gson = new Gson();
         Type fooType = new TypeToken<User>() {}.getType();
@@ -34,10 +34,18 @@ public class UserList{
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }  finally {
+            try {
+                fr.close();
+                br.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
         }
     }
     public void persist(){
-        Iterator it = null;
+        Iterator it;
         it = userMap.entrySet().iterator();
         FileWriter fw = null;
         PrintWriter pw = null;

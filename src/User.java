@@ -21,7 +21,7 @@ public class User{
     public String toJson()
     {
         Gson gson = new Gson();
-        Type fooType = new TypeToken<News>() {}.getType();
+        Type fooType = new TypeToken<User>() {}.getType();
         String json = gson.toJson(this,fooType);
         return json;
     }

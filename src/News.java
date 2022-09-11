@@ -25,6 +25,9 @@ public class News {
     //costruttore completo
     public News(int id, String author, String title, String body, String source, String link, Categories category, Date dateTime) {
 
+        if (id < 0) {
+            id = -1 * id;
+        }
         switch (category) {
             case POLITICS:
                 this.id = "P"+String.valueOf(id);
@@ -153,30 +156,10 @@ public class News {
         return val/rating.size();
     }
 
-   /* public String toString(){
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
-        String strDate = dateFormat.format(this.dateTime);
-        String text = this.title.toUpperCase()+"\n"+this.body+"\n\nAuthor: "+this.author+"\nDate: "+strDate+"\nSource: "+this.getSource()+"\n\nLeggi la notizia completa su "+this.getLink();
-        text.concat("\n\nRating: "+this.ratingValue()+"\nCategoria: "+category.toString());
-        System.out.println(text);
-        return text;
-
-    }*/
    public String toString() {
        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
        String strDate = dateFormat.format(this.dateTime);
-       //String text = this.title.toUpperCase() + "\n" + this.body + "\n\nAuthor: " + this.author + "\nDate: " + strDate;
        String text = this.title.toUpperCase()+"\n"+this.body+"\n\nAuthor: "+this.author+"\nDate: "+strDate+"\nSource: "+this.getSource()+"\n\nLeggi la notizia completa su "+this.getLink()+"\n\nRating: "+this.ratingValue()+"\nCategoria: "+category.toString()+"\nID: "+this.getId();
-       /*if(!this.getComments().isEmpty()){
-           text.concat("\nCOMMENTI:");
-           Iterator it = null;
-           HashMap<Integer, Comment> comments = this.getComments();
-           it = comments.entrySet().iterator();
-           while (it.hasNext()) {
-               Map.Entry<Integer, Comment> entry = (Map.Entry)it.next();
-               text.concat("\n"+ entry.getValue().getOwner()+": "+entry.getValue().getText()+"\n"+dateFormat.format(entry.getValue().getDateTime())+"\n");
-           }
-       }*/
        return   text;
    }
 

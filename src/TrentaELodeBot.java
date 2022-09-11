@@ -10,6 +10,7 @@ import java.io.*;
 import java.lang.reflect.Type;
 import java.net.MalformedURLException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.net.URL;
@@ -20,16 +21,21 @@ import com.sun.syndication.io.XmlReader;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
+import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.dataformat.csv.*;
+
 public class TrentaELodeBot extends TelegramLongPollingBot {
 
     private UserList userMap; //lista di User
+    DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
 
-    public TrentaELodeBot(String path){
+    public TrentaELodeBot(String pathUser, String pathFeedRSS){
         super();
-        userMap = new UserList(path);
+        userMap = new UserList(pathUser);
+        uploadFeedRSSMap(pathFeedRSS);
     }
 
-   // metodo che riceve l'oggetto update dalla chat di telegram e
+   // metodo che riceve l'oggetto "update" dalla chat di telegram e
    // invoca manageCommands() per interpretare il messagio ricevuto ed eseguire azioni
     public void onUpdateReceived(Update update) {
         if (update.hasMessage() && update.getMessage().hasText()) {
@@ -82,16 +88,15 @@ public class TrentaELodeBot extends TelegramLongPollingBot {
         String text = update.getMessage().getText();
 
         //se l'utente non era registrato, allora lo aggiunge alla lista utenti
-        if(!userMap.getUserList().containsKey(update.getMessage().getChat().getUserName())){
+        if((text.equals("/signin"))&&(!userMap.getUserList().containsKey(update.getMessage().getChat().getUserName()))){
             String name = update.getMessage().getChat().getUserName();
             userMap.getUserList().putIfAbsent(name, new User(name));
-            userMap.persist();
-            System.out.println("Percorso file non valido2");
+            userMap.persist(); //metodo di UserList che persiste su file json l'elenco degli utenti aggiornato (sovrascrive il precedente)
             sendMessageToUser(update.getMessage().getChatId(),"Nuovo utente registrato correttamente!");
         }
         else if(text.charAt(0) == '/'){
-            HashMap<String, News> newsMap = null;
-            Iterator it = null;
+            HashMap<String, News> newsMap;
+            Iterator it;
             switch (text) {
                 case "/politica":
                     newsMap = getNewsByCategory(Categories.POLITICS);
@@ -204,7 +209,7 @@ public class TrentaELodeBot extends TelegramLongPollingBot {
             DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
             if (comments.isEmpty() == false) {
                 testo += "\nCOMMENTI:";
-                Iterator it = null;
+                Iterator it;
                 it = comments.entrySet().iterator();
                 while (it.hasNext()) {
                     Map.Entry<Integer, Comment> entry = (Map.Entry) it.next();
@@ -218,13 +223,15 @@ public class TrentaELodeBot extends TelegramLongPollingBot {
         }
     }
 
+    //metodo che sovrascrive il file json che contiene l'elenco di notizie della categoria passata come parametro,
+    // in modo salvare l'aggiunta di commenti e voti alle notizie; viene invocato in manageCommands()
     public void updateJson(HashMap<String, News> map, Categories cat){
-        Iterator it = null;
+        Iterator it;
         it = map.entrySet().iterator();
         FileWriter fw = null;
         PrintWriter pw = null;
         try{
-            fw = new FileWriter(cat.label); //true per fare append, false o niente per sovrascrivere
+            fw = new FileWriter(cat.label);
             pw = new PrintWriter(fw);
             while (it.hasNext()) {
                 Map.Entry<String, News> entry = (Map.Entry)it.next();
@@ -241,6 +248,7 @@ public class TrentaELodeBot extends TelegramLongPollingBot {
         }
     }
 
+    //metodo che aggiunge i bottoni sotto i messaggi telegram
     public SendMessage addButton(SendMessage message, News n){
         InlineKeyboardMarkup markupInline = new InlineKeyboardMarkup();
 
@@ -272,12 +280,11 @@ public class TrentaELodeBot extends TelegramLongPollingBot {
     }
 
 
-    //DA SISTEMARE CON FEED RSS
-
+    //ritorna l'hashmap <id, news> leggendo il file corrispondente alla ctegoria passata come parametro
     public HashMap<String, News> getNewsByCategory(Categories c){
         HashMap<String, News> newsList = new HashMap<String, News>();
-        BufferedReader br = null;
-        FileReader fr = null;
+        BufferedReader br;
+        FileReader fr;
             try {
                 fr = new FileReader(c.label);
                 br = new BufferedReader(fr);
@@ -293,7 +300,8 @@ public class TrentaELodeBot extends TelegramLongPollingBot {
             return newsList;
     }
 
-    public News getNewsById(String id){
+    //metodo deprecato da getNewsMapById(String id)
+    /*public News getNewsById(String id){
         HashMap<String, News> map;
         Iterator it = null;
         char categoryLetter = id.charAt(0);
@@ -392,8 +400,9 @@ public class TrentaELodeBot extends TelegramLongPollingBot {
                 return null;
         }
         return null;
-    }
+    }*/
 
+    //ritorna l'elenco di notizie in cui si trova la news che contiene l'id passato come parametro
     public HashMap<String, News> getNewsMapById(String id){
         HashMap<String, News> list;
         char categoryLetter = id.charAt(0);
@@ -437,6 +446,7 @@ public class TrentaELodeBot extends TelegramLongPollingBot {
         }
     }
 
+    //genera un oggetto notizia leggendo una riga del file json
     public News fromJson(String json) {
         Gson gson = new Gson();
         Type fooType = new TypeToken<News>() {}.getType();
@@ -444,45 +454,51 @@ public class TrentaELodeBot extends TelegramLongPollingBot {
         return n;
     }
 
-    public void persistFeedRSS(String myUrl, Categories cat, String path) {
+    //legge il feed RSS da myUrl, genera oggetti News per ogni notizia del feed e li scrive su un file json al percorso path
+    //la categoria serve per aggiungere la lettera corretta in testa all'id della notizia, nel formato lettera maiuscola+intero hash positivo, es. E1246433
+    public void persistFeedRSS() {
         URL url = null;
         XmlReader reader = null;
+        String myUrl;
+        Categories cat;
         FileWriter fw = null;
-        PrintWriter pw = null;
-        News news = null;
+        PrintWriter pw;
+        News news;
 
-        //try {
-        try {
-            url = new URL(myUrl);
-        } catch (MalformedURLException e) {
-            System.out.println("Attenzione, URL non valido");
-        }
-        try {
-            reader = new XmlReader(url);
-        } catch (IOException e) {
-            System.out.println("Attenzione, IOExc");
-        }
-        try {
-            fw = new FileWriter(new File(path)); //true per fare append, false o niente per sovrascrivere
-        } catch (IOException e) {
-            System.out.println("Attenzione, IOExc2");
-        }
-        pw = new PrintWriter(fw);
+        Iterator it;
+        it = feedRSSMap.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry<Categories, String> en = (Map.Entry) it.next();
+            myUrl = en.getValue();
+            cat = en.getKey();
 
-        SyndFeed feed = null;
-        try {
-            feed = new SyndFeedInput().build(reader);
-        } catch (FeedException e) {
-            throw new RuntimeException(e);
-        }
-        for (Iterator<SyndEntry> i = feed.getEntries().iterator(); i.hasNext();) {
+            try {
+                url = new URL(myUrl);
+            } catch (MalformedURLException e) {
+                System.out.println("Attenzione, URL non valido");
+            }
+            try {
+                reader = new XmlReader(url);
+            } catch (IOException e) {
+                System.out.println("Attenzione, IOExc");
+            }
+            try {
+                fw = new FileWriter(cat.label);
+            } catch (IOException e) {
+                System.out.println("Attenzione, IOExc2");
+            }
+            pw = new PrintWriter(fw);
+
+            SyndFeed feed;
+            try {
+                feed = new SyndFeedInput().build(reader);
+            } catch (FeedException e) {
+                throw new RuntimeException(e);
+            }
+            for (Iterator<SyndEntry> i = feed.getEntries().iterator(); i.hasNext(); ) {
                 //Iteriamo tutte le voci presenti nel nostro feed e ne stampiano le proprietà fondmentali
                 SyndEntry entry = i.next();
-                int hash = entry.hashCode();
-                if(hash<0){
-                    hash = -1*hash;
-                }
-                news = new News(hash, entry.getAuthor(), entry.getTitle(), entry.getDescription().getValue(), "Feed RSS", entry.getLink(), cat, entry.getPublishedDate());
+                news = new News(entry.hashCode(), entry.getAuthor(), entry.getTitle(), entry.getDescription().getValue(), "Feed RSS", entry.getLink(), cat, entry.getPublishedDate());
                 pw.println(news.toJson());
             }
             //Chiudiamo lo stream precedentemente aperto.
@@ -499,6 +515,122 @@ public class TrentaELodeBot extends TelegramLongPollingBot {
                     System.out.println("Attenzione, IOExc4");
                 }
             }
+        }
 
     }
+
+   private  HashMap<Categories, String> feedRSSMap = new HashMap<>();
+    //legge da file l'elenco di feed RSS a cui collegarsi
+    public void uploadFeedRSSMap(String path){
+        BufferedReader br = null;
+        FileReader fr = null;
+        try {
+            fr = new FileReader(path);
+            br = new BufferedReader(fr);
+            String line = br.readLine();
+            while(line!=null) {
+                feedRSSMap.put(Categories.valueOf(line.substring(0,line.indexOf(","))),line.substring(line.indexOf(",")+1));
+                line = br.readLine();
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }  finally {
+            try {
+                fr.close();
+                br.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+    }
+   //aggiunge una nuova fonte feed RSS all'arraylist e al file (pensato per aggiunta di nuovi feed in fase di runtime)
+    public void updateFeedRSSMap(String path, String url, Categories cat){
+        feedRSSMap.put(cat, url);
+        FileWriter fw = null;
+        PrintWriter pw = null;
+        try{
+            fw = new FileWriter(path);
+            pw = new PrintWriter(fw);
+            pw.println(cat.toString().toUpperCase()+","+ url);
+        } catch (IOException e) {
+            System.out.println("Percorso file non valido");
+        }
+        finally{
+            try{
+                fw.close();
+                pw.close();
+            } catch (IOException e){System.out.println("Errore di chiusura");}
+        }
+    }
+
+    //permette di importare e scrivere in append al file del DB della categoria corretta una o più notizie scritte in formato csv con la seguente struttura:
+    //author;title;body;source;link;category;dateTime
+    //Il separatore è ";"
+    public void importCSV(String path){
+        BufferedReader br = null;
+        FileReader fr = null;
+        try {
+            fr = new FileReader(path);
+            br = new BufferedReader(fr);
+            br.readLine(); //riga di intestazione
+            String line = br.readLine();
+            while(line!=null) {
+                persistNews(csvToNews(line));
+                line = br.readLine();
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }  finally {
+            try {
+                fr.close();
+                br.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+    public News csvToNews(String in){
+        String[] arr = in.split(";");
+        try {
+            return new News(arr.hashCode(),arr[0], arr[1], arr[2], arr[3], arr[4], Categories.valueOf(arr[5]), dateFormat.parse(arr[6]));
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void persistNews(News n){
+        FileWriter fw = null;
+        PrintWriter pw = null;
+        try{
+            fw = new FileWriter(n.getCategories().label,true);
+            pw = new PrintWriter(fw);
+            pw.println(n.toJson());
+        } catch (IOException e) {
+            System.out.println("Percorso file non valido");
+        }
+        finally{
+            try{
+                fw.close();
+                pw.close();
+            } catch (IOException e){System.out.println("Errore di chiusura");}
+        }
+    }
+
+    /*public String csvToJson(String in){
+        File input = new File(in);
+        List<Map<?, ?>> list;
+        try {
+            CsvSchema csv = CsvSchema.emptySchema().withHeader();
+            CsvMapper csvMapper = new CsvMapper();
+            MappingIterator<Map<?, ?>> mappingIterator =  csvMapper.readerFor(Map.class).with(csv).readValues(input);
+            list = mappingIterator.readAll();
+            System.out.println(String.valueOf(list));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return String.valueOf(list);
+    }*/
+
+
+
 }
