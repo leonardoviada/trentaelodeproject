@@ -1,3 +1,5 @@
+package it.unibo.trentalode.bot;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.sun.syndication.feed.synd.SyndEntry;
@@ -23,7 +25,7 @@ import java.util.*;
 
 public class TrentaELodeBot extends TelegramLongPollingBot {
 
-    private final UserList userMap; //lista di User
+    private final UserList userMap;
     private final HashMap<Categories, String> feedRSSMap = new HashMap<>();
     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 

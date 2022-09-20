@@ -1,3 +1,5 @@
+package it.unibo.trentalode.bot;
+
 public enum Commands {
     POLITICA("politica"),
     ECONOMIA("economia"),

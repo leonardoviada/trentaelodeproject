@@ -1,3 +1,5 @@
+package it.unibo.trentalode.bot;
+
 import java.util.Date;
 
 public class Comment {

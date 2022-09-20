@@ -4,17 +4,40 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="93cb590f-07d5-4d98-a394-a28b385adde1" name="Changes" comment=":wrench: Adds misc config files">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="93cb590f-07d5-4d98-a394-a28b385adde1" name="Changes" comment=":wrench: Updates .gitignore">
+      <change afterPath="$PROJECT_DIR$/build.fxbuild" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/ConfigProvider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/AggiungiNotiziaSuDB.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/AssegnaCategoriaANotizia.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/CreaUtente.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/EsportaNotizieSuFile.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/ImportaNotizieDaFeed.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/ImportaNotizieDaFile.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/InterfacciaAccessoAdmin.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/InterfacciaAzioni.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/InviaMessaggioAUtenti.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/RimuoviNotiziaDaDB.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/SelezionaCommentoDaRimuovere.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/SelezionaNotizia.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/SelezionaUtenteDaModificare.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/SelezionaUtenteDaRimuovere.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/application.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/trentaelodeproject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/trentaelodeproject.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Categories.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/Categories.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Commands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/Commands.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/Comment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/News.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/News.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TrentaELodeBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/TrentaELodeBot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/UserList.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="CodeInsightWorkspaceSettings">
-    <option name="optimizeImportsOnTheFly" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -30,15 +53,10 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Prova1" />
+        <entry key="$PROJECT_DIR$" value="ProvaBranch" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="JsbtTreeLayoutManager">
-    <layout place="tools.popupGrunt">
-      <scroll-view-position x="0" y="0" />
-    </layout>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -49,6 +67,7 @@
   <component name="ProjectId" id="2AYm4nTIfapYqqp7zMhwEQx2Twz" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
@@ -56,21 +75,44 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/acer/Desktop/UNI/INFO/TrentaELode/jackson/jackson-dataformat-csv-2.9.0.jar",
+    "last_opened_file_path": "/Users/leonardoviada/IdeaProjects/trentaelodeproject",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.23577236",
-    "project.structure.side.proportion": "0.16920733",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
     "rearrange.code.on.save": "true",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+    "settings.editor.selected.configurable": "preferences.sourceCode.Java"
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/.." />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/src/it/unibo/trentalode" />
+      <recent name="$PROJECT_DIR$/src/it/unibo/trentalode/bot" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.InterfacciaAccessoAdmin">
+    <configuration name="InterfacciaAccessoAdmin" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="it.unibo.trentalode.admin.InterfacciaAccessoAdmin" />
+      <module name="trentaelodeproject" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.unibo.trentalode.admin.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="trentaelodeproject" />
@@ -78,8 +120,24 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="it.unibo.trentalode.bot.Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="it.unibo.trentalode.bot.Main" />
+      <module name="trentaelodeproject" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.unibo.trentalode.bot.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.InterfacciaAccessoAdmin" />
+        <item itemvalue="Application.it.unibo.trentalode.bot.Main" />
+        <item itemvalue="Application.Main" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -92,52 +150,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1655194705978</updated>
-      <workItem from="1662970421584" duration="14000" />
-      <workItem from="1663704336302" duration="370000" />
+      <workItem from="1663704775653" duration="51000" />
+      <workItem from="1663704828185" duration="4005000" />
     </task>
-    <task id="LOCAL-00001" summary="Rende disponibile il backend">
-      <created>1655469812523</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1655469812523</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Rende disponibile il backend aggiornato di persistenza su file json e feed rss">
-      <created>1661674337745</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1661674337745</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Rende disponibile il backend aggiornato di persistenza su file json e feed rss, con commenti e rating funzionanti e altri bugfix">
-      <created>1662200181583</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1662200181584</updated>
-    </task>
-    <task id="LOCAL-00004" summary=":wrench: Adds gitignore">
-      <created>1663704446625</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1663704446625</updated>
-    </task>
-    <task id="LOCAL-00005" summary=":art: Updates paths and formatting">
-      <created>1663704559749</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1663704559749</updated>
-    </task>
-    <task id="LOCAL-00006" summary=":wrench: Adds misc config files">
-      <created>1663704585328</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1663704585328</updated>
-    </task>
-    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -153,15 +168,6 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="Rende disponibile il backend" />
-    <MESSAGE value="Rende disponibile il backend aggiornato di persistenza su file json e feed rss" />
-    <MESSAGE value="Rende disponibile il backend aggiornato di persistenza su file json e feed rss, con commenti e rating funzionanti e altri bugfix" />
-    <MESSAGE value=":wrench: Adds gitignore" />
-    <MESSAGE value=":art: Updates paths and formatting" />
-    <MESSAGE value=":wrench: Adds misc config files" />
-    <option name="LAST_COMMIT_MESSAGE" value=":wrench: Adds misc config files" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

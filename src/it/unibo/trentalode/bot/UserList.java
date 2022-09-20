@@ -1,8 +1,13 @@
+package it.unibo.trentalode.bot;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import it.unibo.trentalode.ConfigProvider;
 
 import java.io.*;
 import java.lang.reflect.Type;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -27,11 +32,10 @@ public class UserList {
         try {
             fr = new FileReader(path);
             br = new BufferedReader(fr);
-            String line = br.readLine();
-            while (line != null) {
-                User u = gson.fromJson(line, fooType);
+            Reader reader = Files.newBufferedReader(Paths.get(ConfigProvider.getInstance().getProperty("USERS_PATH")));
+            while (reader.ready()) {
+                User u = gson.fromJson(reader, fooType);
                 this.userMap.put(u.getUsername(), u);
-                line = br.readLine();
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -42,7 +46,6 @@ public class UserList {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-
         }
     }
 

@@ -1,13 +1,14 @@
+package it.unibo.trentalode.bot;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.lang.reflect.Type;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 
 public class News {
     private String id;
@@ -24,37 +25,36 @@ public class News {
 
     //costruttore completo
     public News(int id, String author, String title, String body, String source, String link, Categories category, Date dateTime) {
-
         if (id < 0) {
             id = -1 * id;
         }
         switch (category) {
             case POLITICS:
-                this.id = "P"+String.valueOf(id);
+                this.id = "P" + String.valueOf(id);
                 break;
             case ECONOMY:
-                this.id = "E"+String.valueOf(id);
+                this.id = "E" + String.valueOf(id);
                 break;
             case TECH:
-                this.id = "T"+String.valueOf(id);
+                this.id = "T" + String.valueOf(id);
                 break;
             case SPORT:
-                this.id = "S"+String.valueOf(id);
+                this.id = "S" + String.valueOf(id);
                 break;
             case SHOW:
-                this.id = "s"+String.valueOf(id);
+                this.id = "s" + String.valueOf(id);
                 break;
             case CULTURE:
-                this.id = "C"+String.valueOf(id);
+                this.id = "C" + String.valueOf(id);
                 break;
             case ITALY:
-                this.id = "I"+String.valueOf(id);
+                this.id = "I" + String.valueOf(id);
                 break;
             case WORLD:
-                this.id = "W"+String.valueOf(id);
+                this.id = "W" + String.valueOf(id);
                 break;
             case LATEST_NEWS:
-                this.id = "L"+String.valueOf(id);
+                this.id = "L" + String.valueOf(id);
                 break;
         }
 
@@ -121,16 +121,16 @@ public class News {
         return category;
     }
 
+    public void setCategories(Categories category) {
+        this.category = category;
+    }
+
     public Date getDateTime() {
         return dateTime;
     }
 
     public void setDateTime(Date dateTime) {
         this.dateTime = dateTime;
-    }
-
-    public void setCategories(Categories category) {
-        this.category = category;
     }
 
     public HashMap<Integer, Comment> getComments() {
@@ -148,30 +148,27 @@ public class News {
     public void setRating(ArrayList<Double> rating) {
         this.rating = rating;
     }
-    public double ratingValue(){
+
+    public double ratingValue() {
         double val = 0;
-        for(Double d: rating){
+        for (Double d : rating) {
             val += d;
         }
-        return val/rating.size();
+        return val / rating.size();
     }
 
-   public String toString() {
-       DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
-       String strDate = dateFormat.format(this.dateTime);
-       String text = this.title.toUpperCase()+"\n"+this.body+"\n\nAuthor: "+this.author+"\nDate: "+strDate+"\nSource: "+this.getSource()+"\n\nLeggi la notizia completa su "+this.getLink()+"\n\nRating: "+this.ratingValue()+"\nCategoria: "+category.toString()+"\nID: "+this.getId();
-       return   text;
-   }
+    public String toString() {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+        String strDate = dateFormat.format(this.dateTime);
+        String text = this.title.toUpperCase() + "\n" + this.body + "\n\nAuthor: " + this.author + "\nDate: " + strDate + "\nSource: " + this.getSource() + "\n\nLeggi la notizia completa su " + this.getLink() + "\n\nRating: " + this.ratingValue() + "\nCategoria: " + category.toString() + "\nID: " + this.getId();
+        return text;
+    }
 
-    public String toJson()
-    {
+    public String toJson() {
         Gson gson = new Gson();
-        Type fooType = new TypeToken<News>() {}.getType();
-        String json = gson.toJson(this,fooType);
+        Type fooType = new TypeToken<News>() {
+        }.getType();
+        String json = gson.toJson(this, fooType);
         return json;
     }
-
-
-
-
 }
