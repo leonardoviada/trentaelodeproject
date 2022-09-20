@@ -4,21 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="93cb590f-07d5-4d98-a394-a28b385adde1" name="Changes" comment=":art: Updates paths and formatting">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/gson_2_9_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/jackson_databind_2_13_4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/jackson_dataformat_csv_2_9_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/jdom_1_1_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/rome_1_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/trentaelodeproject.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/telegrambots_6_0_1_jar_with_dependencies.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/telegrambots_6_0_1_jar_with_dependencies.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+    <list default="true" id="93cb590f-07d5-4d98-a394-a28b385adde1" name="Changes" comment=":wrench: Adds misc config files">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Categories.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Categories.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TrentaELodeBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TrentaELodeBot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserList.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +93,7 @@
       <option name="presentableId" value="Default" />
       <updated>1655194705978</updated>
       <workItem from="1662970421584" duration="14000" />
-      <workItem from="1663704336302" duration="149000" />
+      <workItem from="1663704336302" duration="370000" />
     </task>
     <task id="LOCAL-00001" summary="Rende disponibile il backend">
       <created>1655469812523</created>
@@ -135,7 +123,21 @@
       <option name="project" value="LOCAL" />
       <updated>1663704446625</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary=":art: Updates paths and formatting">
+      <created>1663704559749</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1663704559749</updated>
+    </task>
+    <task id="LOCAL-00006" summary=":wrench: Adds misc config files">
+      <created>1663704585328</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1663704585328</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -158,7 +160,8 @@
     <MESSAGE value="Rende disponibile il backend aggiornato di persistenza su file json e feed rss, con commenti e rating funzionanti e altri bugfix" />
     <MESSAGE value=":wrench: Adds gitignore" />
     <MESSAGE value=":art: Updates paths and formatting" />
-    <option name="LAST_COMMIT_MESSAGE" value=":art: Updates paths and formatting" />
+    <MESSAGE value=":wrench: Adds misc config files" />
+    <option name="LAST_COMMIT_MESSAGE" value=":wrench: Adds misc config files" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
