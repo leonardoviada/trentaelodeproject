@@ -78,6 +78,7 @@ public class AggiungiNotiziaSuDB {
             creaNotizia.setOnMouseClicked(it -> {
                 News news = new News(123, campoAutore.getText(), campoTitolo.getText(), campoCorpo.getText(), campoFonte.getText(), "https://corriere.it", Categories.LATEST_NEWS, new Date(2022, Calendar.SEPTEMBER, 21));
                 aggiunta.setVisible(true);
+                news.persist();
             });
 
             Button tornaIndietro = new Button("Torna al menu iniziale");

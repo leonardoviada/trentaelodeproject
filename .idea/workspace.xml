@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="93cb590f-07d5-4d98-a394-a28b385adde1" name="Changes" comment=":construction: Unisce componenti interfaccia e logica e avvia refactoring">
+    <list default="true" id="93cb590f-07d5-4d98-a394-a28b385adde1" name="Changes" comment=":construction: Updates JSON I/O implementation">
+      <change afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/IOManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/config.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/AggiungiNotiziaSuDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/AggiungiNotiziaSuDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/RimuoviNotiziaDaDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/RimuoviNotiziaDaDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/News.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/News.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/TrentaELodeBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/TrentaELodeBot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/UserList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/UserList.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,23 +49,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/leonardoviada/IdeaProjects/trentaelodeproject",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "rearrange.code.on.save": "true",
-    "settings.editor.selected.configurable": "preferences.sourceCode.Java"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/leonardoviada/IdeaProjects/trentaelodeproject&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;rearrange.code.on.save&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.Java&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
@@ -111,8 +113,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.it.unibo.trentalode.bot.Main" />
         <item itemvalue="Application.InterfacciaAccessoAdmin" />
+        <item itemvalue="Application.it.unibo.trentalode.bot.Main" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.Main" />
       </list>
@@ -127,16 +129,9 @@
       <option name="presentableId" value="Default" />
       <updated>1655194705978</updated>
       <workItem from="1663704775653" duration="51000" />
-      <workItem from="1663704828185" duration="5708000" />
+      <workItem from="1663704828185" duration="4005000" />
+      <workItem from="1663713486451" duration="573000" />
     </task>
-    <task id="LOCAL-00001" summary=":construction: Unisce componenti interfaccia e logica e avvia refactoring">
-      <created>1663708892829</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1663708892829</updated>
-    </task>
-    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -152,10 +147,6 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value=":construction: Unisce componenti interfaccia e logica e avvia refactoring" />
-    <option name="LAST_COMMIT_MESSAGE" value=":construction: Unisce componenti interfaccia e logica e avvia refactoring" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

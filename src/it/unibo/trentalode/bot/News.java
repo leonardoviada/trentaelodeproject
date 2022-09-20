@@ -3,6 +3,9 @@ package it.unibo.trentalode.bot;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.lang.reflect.Type;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -15,15 +18,26 @@ public class News {
     private String author;
     private String title;
     private String body;
-    private String source; //la fonte da cui proviene (testate giornalistiche, siti, ecc)
-    private String link; //link se la notizia è pubblicata online
+    /**
+     * La fonte da cui proviene (testate giornalistiche, siti, ecc)
+     */
+    private String source;
+    /**
+     * link se la notizia è pubblicata online
+     */
+    private String link;
     private Categories category;
     private HashMap<Integer, Comment> comments;
     private Date dateTime;
-    private ArrayList<Double> rating; //rating della notizia da 0 a 10
+    /**
+     * Rating della notizia da 0 a 10
+     */
+    private ArrayList<Double> rating;
 
 
-    //costruttore completo
+    /**
+     * Costruttore completo
+     */
     public News(int id, String author, String title, String body, String source, String link, Categories category, Date dateTime) {
         if (id < 0) {
             id = -1 * id;
@@ -170,5 +184,26 @@ public class News {
         }.getType();
         String json = gson.toJson(this, fooType);
         return json;
+    }
+
+    public void persist() {
+        FileWriter fw = null;
+        PrintWriter pw = null;
+        try {
+            fw = new FileWriter(this.getCategories().label, true);
+            pw = new PrintWriter(fw);
+            pw.println(this.toJson());
+        } catch (IOException e) {
+            System.out.println("Percorso file non valido");
+        } finally {
+            try {
+                assert fw != null;
+                fw.close();
+                assert pw != null;
+                pw.close();
+            } catch (IOException e) {
+                System.out.println("Errore di chiusura");
+            }
+        }
     }
 }

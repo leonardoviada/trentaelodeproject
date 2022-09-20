@@ -36,8 +36,13 @@ public class TrentaELodeBot extends TelegramLongPollingBot {
         uploadFeedRSSMap(pathFeedRSS);
     }
 
-    // metodo che riceve l'oggetto "update" dalla chat di telegram e
-    // invoca manageCommands() per interpretare il messagio ricevuto ed eseguire azioni
+
+    /**
+     * Metodo che riceve l'oggetto "update" dalla chat di telegram e
+     * invoca manageCommands() per interpretare il messagio ricevuto ed eseguire azioni
+     *
+     * @param update
+     */
     public void onUpdateReceived(Update update) {
         if (update.hasMessage() && update.getMessage().hasText()) {
             manageCommands(update);
@@ -47,7 +52,6 @@ public class TrentaELodeBot extends TelegramLongPollingBot {
 
     @Override
     public String getBotUsername() {
-        // TODO
         return ConfigProvider.getInstance().getProperty("BOT_USERNAME");
     }
 
@@ -56,9 +60,16 @@ public class TrentaELodeBot extends TelegramLongPollingBot {
         return ConfigProvider.getInstance().getProperty("BOT_TOKEN");
     }
 
-    //metodo che prende in entrata l'id della chat di telegram con l'utente, l'oggetto News e un valore boolean
-    // e invia un messaggio su telegram all'utente in riposta a un comando ricevuto.
-    //Il valore boolean serve per specificare se è ncessario inserire i bottoni "commenta","vota","leggi commenti" sotto al messaggio
+
+    /**
+     * Metodo che prende in entrata l'id della chat di telegram con l'utente, l'oggetto News e un valore boolean
+     * e invia un messaggio su telegram all'utente in riposta a un comando ricevuto.
+     * Il valore boolean serve per specificare se è ncessario inserire i bottoni "commenta","vota","leggi commenti" sotto al messaggio
+     *
+     * @param chat_id
+     * @param news
+     * @param commentable
+     */
     public void sendMessageToUser(long chat_id, News news, boolean commentable) {
         SendMessage message = new SendMessage();
         message.setChatId(Long.toString(chat_id));
@@ -73,7 +84,13 @@ public class TrentaELodeBot extends TelegramLongPollingBot {
         }
     }
 
-    //overload del metodo precedente, ma senza l'attributo boolean in quanto non si vogliono aggiungere i bottoni al messaggio
+
+    /**
+     * Overload del metodo precedente, ma senza l'attributo boolean in quanto non si vogliono aggiungere i bottoni al messaggio
+     *
+     * @param chat_id
+     * @param text
+     */
     public void sendMessageToUser(long chat_id, String text) {
         SendMessage message = new SendMessage(); // Create a SendMessage object with mandatory fields
         message.setChatId(Long.toString(chat_id));
@@ -85,7 +102,12 @@ public class TrentaELodeBot extends TelegramLongPollingBot {
         }
     }
 
-    //riceve in input l'oggetto del messaggio ricevuto dall'utente telegram, ne estrae il contenuto testuale e altre info sull'utente (chat_id, username, ecc)
+
+    /**
+     * Riceve in input l'oggetto del messaggio ricevuto dall'utente telegram, ne estrae il contenuto testuale e altre info sull'utente (chat_id, username, ecc)
+     *
+     * @param update
+     */
     public void manageCommands(Update update) {
         String text = update.getMessage().getText();
         System.out.println("Comando " + text + " da utente " + update.getMessage().getChat().getUserName());
@@ -226,8 +248,14 @@ public class TrentaELodeBot extends TelegramLongPollingBot {
         }
     }
 
-    //metodo che sovrascrive il file json che contiene l'elenco di notizie della categoria passata come parametro,
-    // in modo salvare l'aggiunta di commenti e voti alle notizie; viene invocato in manageCommands()
+
+    /**
+     * metodo che sovrascrive il file json che contiene l'elenco di notizie della categoria passata come parametro,
+     * in modo salvare l'aggiunta di commenti e voti alle notizie; viene invocato in manageCommands()
+     *
+     * @param map
+     * @param cat
+     */
     public void updateJson(HashMap<String, News> map, Categories cat) {
         Iterator it;
         it = map.entrySet().iterator();
@@ -254,7 +282,14 @@ public class TrentaELodeBot extends TelegramLongPollingBot {
         }
     }
 
-    //metodo che aggiunge i bottoni sotto i messaggi telegram
+
+    /**
+     * Metodo che aggiunge i bottoni sotto i messaggi telegram
+     *
+     * @param message
+     * @param n
+     * @return
+     */
     public SendMessage addButton(SendMessage message, News n) {
         InlineKeyboardMarkup markupInline = new InlineKeyboardMarkup();
 
@@ -285,109 +320,12 @@ public class TrentaELodeBot extends TelegramLongPollingBot {
         return message;
     }
 
-    //metodo deprecato da getNewsMapById(String id)
-    /*public News getNewsById(String id){
-        HashMap<String, News> map;
-        Iterator it = null;
-        char categoryLetter = id.charAt(0);
-        switch (categoryLetter){
-            case 'P':
-                map = getNewsByCategory(Categories.POLITICS);
-                it = map.entrySet().iterator();
-                while (it.hasNext()) {
-                    Map.Entry<String, News> entry = (Map.Entry)it.next();
-                    if(entry.getKey().equals(id)){
-                        return entry.getValue();
-                    }
-                }
-                break;
-            case 'E':
-                map = getNewsByCategory(Categories.ECONOMY);
-                it = map.entrySet().iterator();
-                while (it.hasNext()) {
-                    Map.Entry<String, News> entry = (Map.Entry)it.next();
-                    if(entry.getKey().equals(id)){
-                        return entry.getValue();
-                    }
-                }
-                break;
-            case 'T':
-                map = getNewsByCategory(Categories.TECH);
-                it = map.entrySet().iterator();
-                while (it.hasNext()) {
-                    Map.Entry<String, News> entry = (Map.Entry)it.next();
-                    if(entry.getKey().equals(id)){
-                        return entry.getValue();
-                    }
-                }
-                break;
-            case 'S':
-                map = getNewsByCategory(Categories.SPORT);
-                it = map.entrySet().iterator();
-                while (it.hasNext()) {
-                    Map.Entry<String, News> entry = (Map.Entry)it.next();
-                    if(entry.getKey().equals(id)){
-                        return entry.getValue();
-                    }
-                }
-                break;
-            case 's':
-                map = getNewsByCategory(Categories.SHOW);
-                it = map.entrySet().iterator();
-                while (it.hasNext()) {
-                    Map.Entry<String, News> entry = (Map.Entry)it.next();
-                    if(entry.getKey().equals(id)){
-                        return entry.getValue();
-                    }
-                }
-                break;
-            case 'C':
-                map = getNewsByCategory(Categories.CULTURE);
-                it = map.entrySet().iterator();
-                while (it.hasNext()) {
-                    Map.Entry<String, News> entry = (Map.Entry)it.next();
-                    if(entry.getKey().equals(id)){
-                        return entry.getValue();
-                    }
-                }
-                break;
-            case 'I':
-                map = getNewsByCategory(Categories.ITALY);
-                it = map.entrySet().iterator();
-                while (it.hasNext()) {
-                    Map.Entry<String, News> entry = (Map.Entry)it.next();
-                    if(entry.getKey().equals(id)){
-                        return entry.getValue();
-                    }
-                }
-                break;
-            case 'W':
-                map = getNewsByCategory(Categories.WORLD);
-                it = map.entrySet().iterator();
-                while (it.hasNext()) {
-                    Map.Entry<String, News> entry = (Map.Entry)it.next();
-                    if(entry.getKey().equals(id)){
-                        return entry.getValue();
-                    }
-                }
-                break;
-            case 'L':
-                map = getNewsByCategory(Categories.LATEST_NEWS);
-                it = map.entrySet().iterator();
-                while (it.hasNext()) {
-                    Map.Entry<String, News> entry = (Map.Entry)it.next();
-                    if(entry.getKey().equals(id)){
-                        return entry.getValue();
-                    }
-                }
-                break;
-            default:
-                return null;
-        }
-        return null;
-    }*/
-
-    //ritorna l'hashmap <id, news> leggendo il file corrispondente alla ctegoria passata come parametro
+    /**
+     * Ritorna l'hashmap <id, news> leggendo il file corrispondente alla ctegoria passata come parametro
+     *
+     * @param c
+     * @return
+     */
     public HashMap<String, News> getNewsByCategory(Categories c) {
         HashMap<String, News> newsList = new HashMap<String, News>();
         BufferedReader br;
@@ -407,7 +345,12 @@ public class TrentaELodeBot extends TelegramLongPollingBot {
         return newsList;
     }
 
-    //ritorna l'elenco di notizie in cui si trova la news che contiene l'id passato come parametro
+    /**
+     * Ritorna l'elenco di notizie in cui si trova la news che contiene l'id passato come parametro
+     *
+     * @param id
+     * @return
+     */
     public HashMap<String, News> getNewsMapById(String id) {
         HashMap<String, News> list;
         char categoryLetter = id.charAt(0);
@@ -451,7 +394,13 @@ public class TrentaELodeBot extends TelegramLongPollingBot {
         }
     }
 
-    //genera un oggetto notizia leggendo una riga del file json
+
+    /**
+     * Genera un oggetto notizia leggendo una riga del file json
+     *
+     * @param json
+     * @return
+     */
     public News fromJson(String json) {
         Gson gson = new Gson();
         Type fooType = new TypeToken<News>() {
@@ -460,8 +409,10 @@ public class TrentaELodeBot extends TelegramLongPollingBot {
         return n;
     }
 
-    //legge il feed RSS da myUrl, genera oggetti News per ogni notizia del feed e li scrive su un file json al percorso path
-    //la categoria serve per aggiungere la lettera corretta in testa all'id della notizia, nel formato lettera maiuscola+intero hash positivo, es. E1246433
+    /**
+     * legge il feed RSS da myUrl, genera oggetti News per ogni notizia del feed e li scrive su un file json al percorso path
+     * la categoria serve per aggiungere la lettera corretta in testa all'id della notizia, nel formato lettera maiuscola+intero hash positivo, es. E1246433
+     */
     public void persistFeedRSS() {
         URL url = null;
         XmlReader reader = null;
@@ -526,7 +477,11 @@ public class TrentaELodeBot extends TelegramLongPollingBot {
 
     }
 
-    //legge da file l'elenco di feed RSS a cui collegarsi
+    /**
+     * Legge da file l'elenco di feed RSS a cui collegarsi
+     *
+     * @param path
+     */
     public void uploadFeedRSSMap(String path) {
         BufferedReader br = null;
         FileReader fr = null;
@@ -551,7 +506,13 @@ public class TrentaELodeBot extends TelegramLongPollingBot {
 
     }
 
-    //aggiunge una nuova fonte feed RSS all'arraylist e al file (pensato per aggiunta di nuovi feed in fase di runtime)
+    /**
+     * aggiunge una nuova fonte feed RSS all'arraylist e al file (pensato per aggiunta di nuovi feed in fase di runtime)
+     *
+     * @param path
+     * @param url
+     * @param cat
+     */
     public void updateFeedRSSMap(String path, String url, Categories cat) {
         feedRSSMap.put(cat, url);
         FileWriter fw = null;
@@ -572,9 +533,14 @@ public class TrentaELodeBot extends TelegramLongPollingBot {
         }
     }
 
-    //permette di importare e scrivere in append al file del DB della categoria corretta una o più notizie scritte in formato csv con la seguente struttura:
-    //author;title;body;source;link;category;dateTime
-    //Il separatore è ";"
+
+    /**
+     * permette di importare e scrivere in append al file del DB della categoria corretta una o più notizie scritte in formato csv con la seguente struttura:
+     * author;title;body;source;link;category;dateTime
+     * Il separatore è ";"
+     *
+     * @param path
+     */
     public void importCSV(String path) {
         BufferedReader br = null;
         FileReader fr = null;
@@ -584,14 +550,16 @@ public class TrentaELodeBot extends TelegramLongPollingBot {
             br.readLine(); //riga di intestazione
             String line = br.readLine();
             while (line != null) {
-                persistNews(csvToNews(line));
+                csvToNews(line).persist();
                 line = br.readLine();
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         } finally {
             try {
+                assert fr != null;
                 fr.close();
+                assert br != null;
                 br.close();
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -602,45 +570,9 @@ public class TrentaELodeBot extends TelegramLongPollingBot {
     public News csvToNews(String in) {
         String[] arr = in.split(";");
         try {
-            return new News(arr.hashCode(), arr[0], arr[1], arr[2], arr[3], arr[4], Categories.valueOf(arr[5]), dateFormat.parse(arr[6]));
+            return new News(Arrays.hashCode(arr), arr[0], arr[1], arr[2], arr[3], arr[4], Categories.valueOf(arr[5]), dateFormat.parse(arr[6]));
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
     }
-
-    public void persistNews(News n) {
-        FileWriter fw = null;
-        PrintWriter pw = null;
-        try {
-            fw = new FileWriter(n.getCategories().label, true);
-            pw = new PrintWriter(fw);
-            pw.println(n.toJson());
-        } catch (IOException e) {
-            System.out.println("Percorso file non valido");
-        } finally {
-            try {
-                fw.close();
-                pw.close();
-            } catch (IOException e) {
-                System.out.println("Errore di chiusura");
-            }
-        }
-    }
-
-    /*public String csvToJson(String in){
-        File input = new File(in);
-        List<Map<?, ?>> list;
-        try {
-            CsvSchema csv = CsvSchema.emptySchema().withHeader();
-            CsvMapper csvMapper = new CsvMapper();
-            MappingIterator<Map<?, ?>> mappingIterator =  csvMapper.readerFor(Map.class).with(csv).readValues(input);
-            list = mappingIterator.readAll();
-            System.out.println(String.valueOf(list));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return String.valueOf(list);
-    }*/
-
-
 }
