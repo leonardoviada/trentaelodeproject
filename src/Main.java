@@ -6,7 +6,7 @@ public class Main {
     public static void main(String[] args) {
         // Instantiate Telegram Bots API
         TelegramBotsApi botsApi;
-        TrentaELodeBot tlb = new TrentaELodeBot("C:\\Users\\acer\\Desktop\\UNI\\INFO\\TrentaELode\\DB\\USERS.json","C:\\Users\\acer\\Desktop\\UNI\\INFO\\TrentaELode\\DB\\FeedRSS.txt");
+        TrentaELodeBot tlb = new TrentaELodeBot("users.json", "rss.txt");
         try {
             botsApi = new TelegramBotsApi(DefaultBotSession.class);
             // Register our bot
@@ -18,7 +18,7 @@ public class Main {
         }
 
         tlb.persistFeedRSS();
-        tlb.importCSV("C:\\Users\\acer\\Desktop\\UNI\\INFO\\TrentaELode\\DB\\newsCsv.csv");
+        tlb.importCSV("data.csv");
     }
 
 
