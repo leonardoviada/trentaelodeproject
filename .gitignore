@@ -27,3 +27,9 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+### I/O ##
+data.csv
+latest_news.json
+rss.txt
+users.json

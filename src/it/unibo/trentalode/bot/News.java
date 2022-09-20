@@ -1,3 +1,9 @@
+package it.unibo.trentalode.bot;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -5,7 +11,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class News {
-    private long id;
+    private String id;
     private String author;
     private String title;
     private String body;
@@ -16,20 +22,42 @@ public class News {
     private Date dateTime;
     private ArrayList<Double> rating; //rating della notizia da 0 a 10
 
-    //costruttore minimale
-    public News(long id, String author, String title, String body, Date dateTime) {
-        this.id = id;
-        this.author = author;
-        this.title = title;
-        this.body = body;
-        this.dateTime = dateTime;
-        rating = new ArrayList<Double>();
-        comments = new HashMap<Integer, Comment>();
-    }
 
     //costruttore completo
-    public News(long id, String author, String title, String body, String source, String link, Categories category, Date dateTime) {
-        this.id = id;
+    public News(int id, String author, String title, String body, String source, String link, Categories category, Date dateTime) {
+        if (id < 0) {
+            id = -1 * id;
+        }
+        switch (category) {
+            case POLITICS:
+                this.id = "P" + String.valueOf(id);
+                break;
+            case ECONOMY:
+                this.id = "E" + String.valueOf(id);
+                break;
+            case TECH:
+                this.id = "T" + String.valueOf(id);
+                break;
+            case SPORT:
+                this.id = "S" + String.valueOf(id);
+                break;
+            case SHOW:
+                this.id = "s" + String.valueOf(id);
+                break;
+            case CULTURE:
+                this.id = "C" + String.valueOf(id);
+                break;
+            case ITALY:
+                this.id = "I" + String.valueOf(id);
+                break;
+            case WORLD:
+                this.id = "W" + String.valueOf(id);
+                break;
+            case LATEST_NEWS:
+                this.id = "L" + String.valueOf(id);
+                break;
+        }
+
         this.author = author;
         this.title = title;
         this.body = body;
@@ -41,11 +69,11 @@ public class News {
         comments = new HashMap<Integer, Comment>();
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -93,16 +121,16 @@ public class News {
         return category;
     }
 
+    public void setCategories(Categories category) {
+        this.category = category;
+    }
+
     public Date getDateTime() {
         return dateTime;
     }
 
     public void setDateTime(Date dateTime) {
         this.dateTime = dateTime;
-    }
-
-    public void setCategories(Categories category) {
-        this.category = category;
     }
 
     public HashMap<Integer, Comment> getComments() {
@@ -120,28 +148,27 @@ public class News {
     public void setRating(ArrayList<Double> rating) {
         this.rating = rating;
     }
-    public double ratingValue(){
+
+    public double ratingValue() {
         double val = 0;
-        for(Double d: rating){
+        for (Double d : rating) {
             val += d;
         }
-        return val/rating.size();
+        return val / rating.size();
     }
 
-   /* public String toString(){
+    public String toString() {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
         String strDate = dateFormat.format(this.dateTime);
-        String text = this.title.toUpperCase()+"\n"+this.body+"\n\nAuthor: "+this.author+"\nDate: "+strDate+"\nSource: "+this.getSource()+"\n\nLeggi la notizia completa su "+this.getLink();
-        text.concat("\n\nRating: "+this.ratingValue()+"\nCategoria: "+category.toString());
-        System.out.println(text);
+        String text = this.title.toUpperCase() + "\n" + this.body + "\n\nAuthor: " + this.author + "\nDate: " + strDate + "\nSource: " + this.getSource() + "\n\nLeggi la notizia completa su " + this.getLink() + "\n\nRating: " + this.ratingValue() + "\nCategoria: " + category.toString() + "\nID: " + this.getId();
         return text;
+    }
 
-    }*/
-   public String toString() {
-       DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
-       String strDate = dateFormat.format(this.dateTime);
-       //String text = this.title.toUpperCase() + "\n" + this.body + "\n\nAuthor: " + this.author + "\nDate: " + strDate;
-       String text = this.title.toUpperCase()+"\n"+this.body+"\n\nAuthor: "+this.author+"\nDate: "+strDate+"\nSource: "+this.getSource()+"\n\nLeggi la notizia completa su "+this.getLink()+"\n\nRating: "+this.ratingValue()+"\nCategoria: "+category.toString()+"\nID: "+this.getId();
-       return text;
-   }
+    public String toJson() {
+        Gson gson = new Gson();
+        Type fooType = new TypeToken<News>() {
+        }.getType();
+        String json = gson.toJson(this, fooType);
+        return json;
+    }
 }

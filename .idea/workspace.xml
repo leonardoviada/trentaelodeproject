@@ -1,24 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="93cb590f-07d5-4d98-a394-a28b385adde1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/telegrambots_6_0_1_jar_with_dependencies.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrentaELode.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Admin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Categories.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Commands.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Comment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GenericUser.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GenericUserList.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/News.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/TrentaELodeBot.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/User.java" afterDir="false" />
+    <list default="true" id="93cb590f-07d5-4d98-a394-a28b385adde1" name="Changes" comment=":wrench: Updates .gitignore">
+      <change afterPath="$PROJECT_DIR$/build.fxbuild" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/ConfigProvider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/AggiungiNotiziaSuDB.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/AssegnaCategoriaANotizia.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/CreaUtente.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/EsportaNotizieSuFile.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/ImportaNotizieDaFeed.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/ImportaNotizieDaFile.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/InterfacciaAccessoAdmin.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/InterfacciaAzioni.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/InviaMessaggioAUtenti.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/RimuoviNotiziaDaDB.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/SelezionaCommentoDaRimuovere.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/SelezionaNotizia.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/SelezionaUtenteDaModificare.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/SelezionaUtenteDaRimuovere.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/application.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/trentaelodeproject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/trentaelodeproject.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Categories.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/Categories.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Commands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/Commands.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/Comment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/News.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/News.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TrentaELodeBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/TrentaELodeBot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/UserList.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,15 +47,27 @@
       </list>
     </option>
   </component>
+  <component name="FormatOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="ProvaBranch" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="OptimizeOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
   <component name="ProjectId" id="2AYm4nTIfapYqqp7zMhwEQx2Twz" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
@@ -49,24 +75,69 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "C:/Users/acer/Desktop/UNI/INFO/TrentaELode/telegrambots-6.0.1-jar-with-dependencies.jar",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/Users/leonardoviada/IdeaProjects/trentaelodeproject",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "project.propVCSSupport.CommitDialog"
+    "rearrange.code.on.save": "true",
+    "settings.editor.selected.configurable": "preferences.sourceCode.Java"
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/.." />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/src/it/unibo/trentalode" />
+      <recent name="$PROJECT_DIR$/src/it/unibo/trentalode/bot" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.InterfacciaAccessoAdmin">
+    <configuration name="InterfacciaAccessoAdmin" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="it.unibo.trentalode.admin.InterfacciaAccessoAdmin" />
+      <module name="trentaelodeproject" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.unibo.trentalode.admin.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
-      <module name="TrentaELode" />
+      <module name="trentaelodeproject" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="it.unibo.trentalode.bot.Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="it.unibo.trentalode.bot.Main" />
+      <module name="trentaelodeproject" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.unibo.trentalode.bot.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.InterfacciaAccessoAdmin" />
+        <item itemvalue="Application.it.unibo.trentalode.bot.Main" />
+        <item itemvalue="Application.Main" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -79,8 +150,13 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1655194705978</updated>
+      <workItem from="1663704775653" duration="51000" />
+      <workItem from="1663704828185" duration="4005000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -92,5 +168,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
