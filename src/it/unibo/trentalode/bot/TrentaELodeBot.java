@@ -7,6 +7,7 @@ import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.io.FeedException;
 import com.sun.syndication.io.SyndFeedInput;
 import com.sun.syndication.io.XmlReader;
+import it.unibo.trentalode.ConfigProvider;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -47,12 +48,12 @@ public class TrentaELodeBot extends TelegramLongPollingBot {
     @Override
     public String getBotUsername() {
         // TODO
-        return "trenta_e_lode_bot";
+        return ConfigProvider.getInstance().getProperty("BOT_USERNAME");
     }
 
     @Override
     public String getBotToken() {
-        return "5551855563:AAFGvCGz4biEKB9q_ctSs6tVLKY2MU02zKI";
+        return ConfigProvider.getInstance().getProperty("BOT_TOKEN");
     }
 
     //metodo che prende in entrata l'id della chat di telegram con l'utente, l'oggetto News e un valore boolean
@@ -87,9 +88,13 @@ public class TrentaELodeBot extends TelegramLongPollingBot {
     //riceve in input l'oggetto del messaggio ricevuto dall'utente telegram, ne estrae il contenuto testuale e altre info sull'utente (chat_id, username, ecc)
     public void manageCommands(Update update) {
         String text = update.getMessage().getText();
-
+        System.out.println("Comando " + text + " da utente " + update.getMessage().getChat().getUserName());
         //se l'utente non era registrato, allora lo aggiunge alla lista utenti
-        if ((text.equals("/signin")) && (!userMap.getUserList().containsKey(update.getMessage().getChat().getUserName()))) {
+        if ((text.equals(ConfigProvider.getInstance().getProperty("CMD_SIGNIN")))) {
+            if (userMap.getUserList().containsKey(update.getMessage().getChat().getUserName())) {
+                sendMessageToUser(update.getMessage().getChatId(), "Utente già registrato");
+                return;
+            }
             String name = update.getMessage().getChat().getUserName();
             userMap.getUserList().putIfAbsent(name, new User(name));
             userMap.persist(); //metodo di UserList che persiste su file json l'elenco degli utenti aggiornato (sovrascrive il precedente)
@@ -204,17 +209,17 @@ public class TrentaELodeBot extends TelegramLongPollingBot {
             String id = char_id.toString();
             HashMap<String, News> map = getNewsMapById(id);
             HashMap<Integer, Comment> comments = map.get(id).getComments();
-            String testo = "";
+            StringBuilder testo = new StringBuilder();
             DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
-            if (comments.isEmpty() == false) {
-                testo += "\nCOMMENTI:";
+            if (!comments.isEmpty()) {
+                testo.append("\nCOMMENTI:");
                 Iterator it;
                 it = comments.entrySet().iterator();
                 while (it.hasNext()) {
                     Map.Entry<Integer, Comment> entry = (Map.Entry) it.next();
-                    testo += "\n" + entry.getValue().getOwner() + ": " + entry.getValue().getText() + "\n" + dateFormat.format(entry.getValue().getDateTime()) + "\n";
+                    testo.append("\n").append(entry.getValue().getOwner()).append(": ").append(entry.getValue().getText()).append("\n").append(dateFormat.format(entry.getValue().getDateTime())).append("\n");
                 }
-                sendMessageToUser(update.getMessage().getChatId(), testo);
+                sendMessageToUser(update.getMessage().getChatId(), testo.toString());
             }
         } else {
             sendMessageToUser(update.getMessage().getChatId(), "Comando invalido, riprova");
@@ -239,10 +244,12 @@ public class TrentaELodeBot extends TelegramLongPollingBot {
             System.out.println("Percorso file non valido");
         } finally {
             try {
+                assert fw != null;
                 fw.close();
             } catch (IOException e) {
                 System.out.println("Errore di chiusura");
             }
+            assert pw != null;
             pw.close();
         }
     }
@@ -477,6 +484,7 @@ public class TrentaELodeBot extends TelegramLongPollingBot {
                 System.out.println("Attenzione, URL non valido");
             }
             try {
+                assert url != null;
                 reader = new XmlReader(url);
             } catch (IOException e) {
                 System.out.println("Attenzione, IOExc");
@@ -486,6 +494,7 @@ public class TrentaELodeBot extends TelegramLongPollingBot {
             } catch (IOException e) {
                 System.out.println("Attenzione, IOExc2");
             }
+            assert fw != null;
             pw = new PrintWriter(fw);
 
             SyndFeed feed;
