@@ -1,11 +1,15 @@
 package it.unibo.trentalode.bot;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import it.unibo.trentalode.ConfigProvider;
 
-import java.io.*;
-import java.lang.reflect.Type;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
@@ -25,27 +29,17 @@ public class UserList {
     // prende dal DB l'elenco degli utenti e riempia userMap<username,User>
     public void update() {
         Gson gson = new Gson();
-        Type fooType = new TypeToken<User>() {
-        }.getType();
-        BufferedReader br = null;
-        FileReader fr = null;
+
         try {
-            fr = new FileReader(path);
-            br = new BufferedReader(fr);
             Reader reader = Files.newBufferedReader(Paths.get(ConfigProvider.getInstance().getProperty("USERS_PATH")));
             while (reader.ready()) {
-                User u = gson.fromJson(reader, fooType);
-                this.userMap.put(u.getUsername(), u);
+                User[] users = gson.fromJson(reader, User[].class);
+                for (User u : users) {
+                    this.userMap.put(u.getUsername(), u);
+                }
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
-        } finally {
-            try {
-                fr.close();
-                br.close();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
         }
     }
 
@@ -54,18 +48,27 @@ public class UserList {
         it = userMap.entrySet().iterator();
         FileWriter fw = null;
         PrintWriter pw = null;
+        Gson gson = new Gson();
         try {
             fw = new FileWriter(path);
             pw = new PrintWriter(fw);
+            JsonArray usersArray = new JsonArray();
+
             while (it.hasNext()) {
                 Map.Entry<String, User> entry = (Map.Entry) it.next();
-                pw.println(entry.getValue().toJson());
+                JsonElement jsonElement = gson.toJsonTree(entry);
+                JsonObject jsonObject = (JsonObject) jsonElement;
+                usersArray.add(jsonObject.get("value"));
             }
+
+            pw.print(usersArray);
         } catch (IOException e) {
             System.out.println("Percorso file non valido");
         } finally {
             try {
+                assert fw != null;
                 fw.close();
+                assert pw != null;
                 pw.close();
             } catch (IOException e) {
                 System.out.println("Errore di chiusura");

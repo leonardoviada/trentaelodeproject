@@ -4,35 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="93cb590f-07d5-4d98-a394-a28b385adde1" name="Changes" comment=":wrench: Updates .gitignore">
-      <change afterPath="$PROJECT_DIR$/build.fxbuild" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/ConfigProvider.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/AggiungiNotiziaSuDB.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/AssegnaCategoriaANotizia.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/CreaUtente.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/EsportaNotizieSuFile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/ImportaNotizieDaFeed.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/ImportaNotizieDaFile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/InterfacciaAccessoAdmin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/InterfacciaAzioni.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/InviaMessaggioAUtenti.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/RimuoviNotiziaDaDB.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/SelezionaCommentoDaRimuovere.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/SelezionaNotizia.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/SelezionaUtenteDaModificare.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/SelezionaUtenteDaRimuovere.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/application.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/trentaelodeproject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/trentaelodeproject.iml" afterDir="false" />
+    <list default="true" id="93cb590f-07d5-4d98-a394-a28b385adde1" name="Changes" comment=":construction: Unisce componenti interfaccia e logica e avvia refactoring">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Categories.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/Categories.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Commands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/Commands.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/Comment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/News.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/News.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TrentaELodeBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/TrentaELodeBot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/UserList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/config.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/TrentaELodeBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/TrentaELodeBot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/UserList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/UserList.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,8 +111,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.InterfacciaAccessoAdmin" />
         <item itemvalue="Application.it.unibo.trentalode.bot.Main" />
+        <item itemvalue="Application.InterfacciaAccessoAdmin" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.Main" />
       </list>
@@ -151,8 +127,16 @@
       <option name="presentableId" value="Default" />
       <updated>1655194705978</updated>
       <workItem from="1663704775653" duration="51000" />
-      <workItem from="1663704828185" duration="4005000" />
+      <workItem from="1663704828185" duration="5708000" />
     </task>
+    <task id="LOCAL-00001" summary=":construction: Unisce componenti interfaccia e logica e avvia refactoring">
+      <created>1663708892829</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1663708892829</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -168,6 +152,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value=":construction: Unisce componenti interfaccia e logica e avvia refactoring" />
+    <option name="LAST_COMMIT_MESSAGE" value=":construction: Unisce componenti interfaccia e logica e avvia refactoring" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
