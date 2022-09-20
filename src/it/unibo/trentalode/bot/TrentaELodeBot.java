@@ -26,16 +26,22 @@ import java.util.*;
 
 public class TrentaELodeBot extends TelegramLongPollingBot {
 
+    private static TrentaELodeBot instance;
     private final UserList userMap;
     private final HashMap<Categories, String> feedRSSMap = new HashMap<>();
     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
-    public TrentaELodeBot(String pathUser, String pathFeedRSS) {
+    protected TrentaELodeBot(String pathUser, String pathFeedRSS) {
         super();
         userMap = new UserList(pathUser);
         uploadFeedRSSMap(pathFeedRSS);
     }
 
+    public static TrentaELodeBot getInstance() {
+        if (TrentaELodeBot.instance == null)
+            TrentaELodeBot.instance = new TrentaELodeBot(ConfigProvider.getInstance().getProperty("USERS_PATH"), ConfigProvider.getInstance().getProperty("RSS_PATH"));
+        return TrentaELodeBot.instance;
+    }
 
     /**
      * Metodo che riceve l'oggetto "update" dalla chat di telegram e
@@ -92,11 +98,11 @@ public class TrentaELodeBot extends TelegramLongPollingBot {
      * @param text
      */
     public void sendMessageToUser(long chat_id, String text) {
-        SendMessage message = new SendMessage(); // Create a SendMessage object with mandatory fields
+        SendMessage message = new SendMessage();
         message.setChatId(Long.toString(chat_id));
         message.setText(text);
         try {
-            execute(message); // Call method to send the message
+            execute(message);
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
@@ -111,15 +117,15 @@ public class TrentaELodeBot extends TelegramLongPollingBot {
     public void manageCommands(Update update) {
         String text = update.getMessage().getText();
         System.out.println("Comando " + text + " da utente " + update.getMessage().getChat().getUserName());
-        //se l'utente non era registrato, allora lo aggiunge alla lista utenti
         if ((text.equals(ConfigProvider.getInstance().getProperty("CMD_SIGNIN")))) {
             if (userMap.getUserList().containsKey(update.getMessage().getChat().getUserName())) {
                 sendMessageToUser(update.getMessage().getChatId(), "Utente già registrato");
                 return;
             }
             String name = update.getMessage().getChat().getUserName();
+            //TODO: Persistere anche il chatId in modo tale da consentire l'invio notifiche massimo su lista utenti
             userMap.getUserList().putIfAbsent(name, new User(name));
-            userMap.persist(); //metodo di UserList che persiste su file json l'elenco degli utenti aggiornato (sovrascrive il precedente)
+            userMap.persist();
             sendMessageToUser(update.getMessage().getChatId(), "Nuovo utente registrato correttamente!");
         } else if (text.charAt(0) == '/') {
             HashMap<String, News> newsMap;
@@ -301,7 +307,7 @@ public class TrentaELodeBot extends TelegramLongPollingBot {
         InlineKeyboardButton vota = new InlineKeyboardButton();
         InlineKeyboardButton vediCommenti = new InlineKeyboardButton();
         commenta.setText("Commenta");
-        commenta.setSwitchInlineQueryCurrentChat("<id=" + n.getId() + "><commento>inserisci qui il commento");
+        commenta.setSwitchInlineQueryCurrentChat("<id=" + n.getId() + "><commento> ");
         vota.setText("Vota");
         vota.setSwitchInlineQueryCurrentChat("<id=" + n.getId() + "><voto>8,5");
         vediCommenti.setSwitchInlineQueryCurrentChat("<id=" + n.getId() + ">visualizza_commenti");

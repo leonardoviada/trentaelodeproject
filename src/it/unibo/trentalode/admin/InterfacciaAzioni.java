@@ -1,15 +1,20 @@
 package it.unibo.trentalode.admin;
 
 import it.unibo.trentalode.ConfigProvider;
+import it.unibo.trentalode.bot.TrentaELodeBot;
 import it.unibo.trentalode.bot.UserList;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.telegram.telegrambots.meta.TelegramBotsApi;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
 
 public class InterfacciaAzioni {
@@ -27,6 +32,8 @@ public class InterfacciaAzioni {
             Text title = new Text("Benvenuto! Queste sono le azioni disponibili");
             elencoAzioni.getChildren().add(title);
 
+            Button avviaBot = new Button("AVVIA BOT");
+            elencoAzioni.getChildren().add(avviaBot);
 
             Button aggiungiNotiziaSuDB = new Button("Aggiungi manualmente notizia sul Database");
             elencoAzioni.getChildren().add(aggiungiNotiziaSuDB);
@@ -69,15 +76,38 @@ public class InterfacciaAzioni {
             primaryStage.setResizable(false);
 
 
-            aggiungiNotiziaSuDB.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
+            avviaBot.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent arg0) {
+                    TelegramBotsApi botsApi;
+                    TrentaELodeBot tlb = TrentaELodeBot.getInstance();
+                    try {
+                        botsApi = new TelegramBotsApi(DefaultBotSession.class);
+                        botsApi.registerBot(tlb);
+                        System.out.println("Bot successfully started!");
+                    } catch (TelegramApiException e) {
+                        throw new RuntimeException(e);
+                    }
 
+                    tlb.persistFeedRSS();
+                    tlb.importCSV(ConfigProvider.getInstance().getProperty("CSV_PATH"));
+
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Gestione bot");
+                    alert.setHeaderText("Bot avviato");
+                    alert.setContentText("E' ora possibile interagire con il sistema via Telegram");
+
+                    alert.showAndWait();
+                    avviaBot.setText("BOT AVVIATO");
+                    avviaBot.setDisable(true);
+                }
+            });
+            aggiungiNotiziaSuDB.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent arg0) {
                     AggiungiNotiziaSuDB aggiungi = new AggiungiNotiziaSuDB(primaryStage);
                     scene.setRoot(aggiungi.getRoot());
                 }
-
             });
 
             rimuoviNotiziaDaDB.setOnMouseClicked(new EventHandler<MouseEvent>() {

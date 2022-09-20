@@ -87,6 +87,7 @@ public class InterfacciaAccessoAdmin extends Application {
                 }
             }
         });
+        
         primaryStage.show();
     }
 }

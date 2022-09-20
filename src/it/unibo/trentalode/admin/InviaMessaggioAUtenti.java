@@ -9,53 +9,54 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class InviaMessaggioAUtenti{
-	private final VBox root;
+public class InviaMessaggioAUtenti {
+    private final VBox root;
 
-	InviaMessaggioAUtenti(Stage primaryStage){
-		root= new VBox();
-		root.setAlignment(Pos.CENTER);
-		root.setSpacing(7.5);
+    InviaMessaggioAUtenti(Stage primaryStage) {
+        root = new VBox();
+        root.setAlignment(Pos.CENTER);
+        root.setSpacing(7.5);
 
-		Text inserisciMessaggio= new Text("Inserisci il messaggio da inviare agli utenti");
-		root.getChildren().add(inserisciMessaggio);
+        Text inserisciMessaggio = new Text("Inserisci il messaggio da inviare agli utenti");
+        root.getChildren().add(inserisciMessaggio);
 
-		TextField campoMessaggio= new TextField();
-		campoMessaggio.setMaxWidth(200);
-		root.getChildren().add(campoMessaggio);
+        TextField campoMessaggio = new TextField();
+        campoMessaggio.setMaxWidth(200);
+        root.getChildren().add(campoMessaggio);
 
-		Button inviaMessaggio= new Button("Invia Messaggio");
-		root.getChildren().add(inviaMessaggio);
+        Button inviaMessaggio = new Button("Invia Messaggio");
+        root.getChildren().add(inviaMessaggio);
 
-		Text messaggioInviato= new Text("Messaggio inviato");
-		root.getChildren().add(messaggioInviato);
-		messaggioInviato.setVisible(false);
-		
-		inviaMessaggio.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        Text messaggioInviato = new Text("Messaggio inviato");
+        root.getChildren().add(messaggioInviato);
+        messaggioInviato.setVisible(false);
 
-			@Override
-			public void handle(MouseEvent arg0) {
-				//invia messaggio a utenti
-				messaggioInviato.setVisible(true);
-			}
-		});
-		
-		Button tornaIndietro= new Button("Torna al menu iniziale");
-		root.getChildren().add(tornaIndietro);
+        inviaMessaggio.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
-		tornaIndietro.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent arg0) {
+                //invia messaggio a utenti
+                messaggioInviato.setVisible(true);
 
-			@Override
-			public void handle(MouseEvent arg0) {	
-				InterfacciaAzioni interfaccia= new InterfacciaAzioni(primaryStage);
-				primaryStage.getScene().setRoot(interfaccia.getRoot());
+            }
+        });
 
-			}
-		});
+        Button tornaIndietro = new Button("Torna al menu iniziale");
+        root.getChildren().add(tornaIndietro);
 
-	}
+        tornaIndietro.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
-	public VBox getRoot() {
-		return root;
-	}
+            @Override
+            public void handle(MouseEvent arg0) {
+                InterfacciaAzioni interfaccia = new InterfacciaAzioni(primaryStage);
+                primaryStage.getScene().setRoot(interfaccia.getRoot());
+
+            }
+        });
+
+    }
+
+    public VBox getRoot() {
+        return root;
+    }
 }
