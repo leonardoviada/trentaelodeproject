@@ -1,7 +1,6 @@
 package it.unibo.trentalode.bot;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.io.FeedException;
@@ -9,7 +8,6 @@ import com.sun.syndication.io.SyndFeedInput;
 import com.sun.syndication.io.XmlReader;
 
 import java.io.*;
-import java.lang.reflect.Type;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
@@ -27,12 +25,15 @@ public class IOManager {
      */
     public static News fromJson(String json) {
         Gson gson = new Gson();
-        Type fooType = new TypeToken<News>() {
-        }.getType();
-        News n = gson.fromJson(json, fooType);
-        return n;
+        return gson.fromJson(json, News.class);
     }
 
+    /**
+     * Ritorna l'hashmap <id, news> leggendo il file corrispondente alla ctegoria passata come parametro
+     *
+     * @param c
+     * @return
+     */
     public static HashMap<String, News> getNewsByCategory(Categories c) {
         HashMap<String, News> newsList = new HashMap<String, News>();
         BufferedReader br;
@@ -98,11 +99,11 @@ public class IOManager {
                 throw new RuntimeException(e);
             }
             for (SyndEntry entry : (Iterable<SyndEntry>) feed.getEntries()) {
-                //Iteriamo tutte le voci presenti nel nostro feed e ne stampiano le proprietà fondmentali
+                // Iteriamo tutte le voci presenti nel nostro feed e ne stampiano le proprietà fondmentali
                 news = new News(entry.hashCode(), entry.getAuthor(), entry.getTitle(), entry.getDescription().getValue(), "Feed RSS", entry.getLink(), cat, entry.getPublishedDate());
                 pw.println(news.toJson());
             }
-            //Chiudiamo lo stream precedentemente aperto.
+            // Chiudiamo lo stream precedentemente aperto.
             if (reader != null) {
                 try {
                     fw.close();
@@ -139,7 +140,9 @@ public class IOManager {
             throw new RuntimeException(e);
         } finally {
             try {
+                assert fr != null;
                 fr.close();
+                assert br != null;
                 br.close();
             } catch (IOException e) {
                 throw new RuntimeException(e);

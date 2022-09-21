@@ -1,7 +1,5 @@
 package it.unibo.trentalode.bot;
 
-import it.unibo.trentalode.ConfigProvider;
-
 public enum Categories {
     POLITICS(ConfigProvider.getInstance().getProperty("POLITICS_PATH")),
     ECONOMY(ConfigProvider.getInstance().getProperty("ECONOMY_PATH")),

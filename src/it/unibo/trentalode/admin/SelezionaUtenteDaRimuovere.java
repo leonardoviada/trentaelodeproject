@@ -1,6 +1,6 @@
 package it.unibo.trentalode.admin;
 
-import it.unibo.trentalode.ConfigProvider;
+import it.unibo.trentalode.bot.ConfigProvider;
 import it.unibo.trentalode.bot.User;
 import it.unibo.trentalode.bot.UsersRepository;
 import javafx.collections.FXCollections;

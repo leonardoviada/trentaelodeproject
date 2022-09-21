@@ -1,4 +1,4 @@
-package it.unibo.trentalode;
+package it.unibo.trentalode.bot;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -14,7 +14,6 @@ public class ConfigProvider {
             FileInputStream propsInput = new FileInputStream("config.properties");
             Properties prop = new Properties();
             prop.load(propsInput);
-
             this.properties = prop;
         } catch (IOException e) {
             e.printStackTrace();

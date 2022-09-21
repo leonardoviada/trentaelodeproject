@@ -29,15 +29,4 @@ bin/
 .DS_Store
 
 ### I/O ##
-data.csv
-latest_news.json
-rss.txt
-users.json
-culture.json
-economy.json
-italy.json
-politics.json
-shows.json
-sport.json
-tech.json
-world.path
+data

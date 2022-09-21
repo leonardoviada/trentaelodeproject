@@ -37,6 +37,7 @@ public class News {
 
     /**
      * Costruttore completo
+     * l'id in formato intero viene trasformato in stringa aggiungendo in testa alla stringa la lettera corrispondente alla categoria
      */
     public News(int id, String author, String title, String body, String source, String link, Categories category, Date dateTime) {
         if (id < 0) {
@@ -44,31 +45,31 @@ public class News {
         }
         switch (category) {
             case POLITICS:
-                this.id = "P" + String.valueOf(id);
+                this.id = "P" + id;
                 break;
             case ECONOMY:
-                this.id = "E" + String.valueOf(id);
+                this.id = "E" + id;
                 break;
             case TECH:
-                this.id = "T" + String.valueOf(id);
+                this.id = "T" + id;
                 break;
             case SPORT:
-                this.id = "S" + String.valueOf(id);
+                this.id = "S" + id;
                 break;
             case SHOW:
-                this.id = "s" + String.valueOf(id);
+                this.id = "s" + id;
                 break;
             case CULTURE:
-                this.id = "C" + String.valueOf(id);
+                this.id = "C" + id;
                 break;
             case ITALY:
-                this.id = "I" + String.valueOf(id);
+                this.id = "I" + id;
                 break;
             case WORLD:
-                this.id = "W" + String.valueOf(id);
+                this.id = "W" + id;
                 break;
             case LATEST_NEWS:
-                this.id = "L" + String.valueOf(id);
+                this.id = "L" + id;
                 break;
         }
 
@@ -163,6 +164,7 @@ public class News {
         this.rating = rating;
     }
 
+    // restituisce il valore medio della somma dei voti presi dall'arraylist voti
     public double ratingValue() {
         double val = 0;
         for (Double d : rating) {
@@ -178,6 +180,7 @@ public class News {
         return text;
     }
 
+    // Trasforma l'oggetto notizia corrente in una stringa pronta per essere scritta sul file json
     public String toJson() {
         Gson gson = new Gson();
         Type fooType = new TypeToken<News>() {
@@ -186,6 +189,7 @@ public class News {
         return json;
     }
 
+    //fa append della notizia in formato .json al file della categoria corretta
     public void persist() {
         FileWriter fw = null;
         PrintWriter pw = null;

@@ -1,6 +1,5 @@
 package it.unibo.trentalode.admin;
 
-import it.unibo.trentalode.ConfigProvider;
 import it.unibo.trentalode.bot.TrentaELodeBot;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -26,7 +25,7 @@ public class InterfacciaAzioni {
         elencoAzioni.getChildren().add(errore);
         try {
             elencoAzioni.setSpacing(7.5);
-            Text title = new Text("Admin Naboo - Pannello di controllo");
+            Text title = new Text("Admin 30LBot - Pannello di controllo");
             Separator hSep = new Separator();
 
             elencoAzioni.getChildren().add(title);
@@ -70,15 +69,13 @@ public class InterfacciaAzioni {
                 TelegramBotsApi botsApi;
                 TrentaELodeBot tlb = TrentaELodeBot.getInstance();
                 try {
+                    System.out.println("Avvio bot...");
                     botsApi = new TelegramBotsApi(DefaultBotSession.class);
                     botsApi.registerBot(tlb);
-                    System.out.println("Bot successfully started!");
+                    System.out.println("Bot avviato e in ascolto");
                 } catch (TelegramApiException e) {
                     throw new RuntimeException(e);
                 }
-
-                // IOManager.persistFeedRSS();
-                tlb.importCSV(ConfigProvider.getInstance().getProperty("CSV_PATH"));
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Gestione bot");

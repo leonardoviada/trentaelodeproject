@@ -1,15 +1,14 @@
 package it.unibo.trentalode.admin;
 
-import it.unibo.trentalode.ConfigProvider;
+import it.unibo.trentalode.bot.ConfigProvider;
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -29,7 +28,7 @@ public class InterfacciaAccessoAdmin extends Application {
         root.setSpacing(7.5);
 
 
-        Text nabooBot = new Text("NabooBot");
+        Text nabooBot = new Text("30LBot");
         nabooBot.setFont(Font.font("Alegreya Web Safe Font", FontPosture.ITALIC, 24));
         nabooBot.setFill(Color.BLUE);
         root.getChildren().add(nabooBot);
@@ -55,9 +54,11 @@ public class InterfacciaAccessoAdmin extends Application {
         Button login = new Button("Login");
         root.getChildren().add(login);
         root.setAlignment(Pos.CENTER);
-        Text errorText = new Text("Credenziali errate: riprovare");
-        errorText.setVisible(false);
-        root.getChildren().add(errorText);
+
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Login");
+        alert.setHeaderText("Credenziali errate");
+
 
         Scene scene = new Scene(root, 800, 500);
         primaryStage.setTitle("Login admin");
@@ -65,26 +66,15 @@ public class InterfacciaAccessoAdmin extends Application {
         primaryStage.setScene(scene);
 
 
-        login.setOnMouseEntered(new EventHandler<MouseEvent>() {
-            public void handle(MouseEvent arg0) {
-                login.setTextFill(Color.RED);
-            }
-        });
+        login.setOnMouseEntered(arg0 -> login.setTextFill(Color.BLUE));
 
-        login.setOnMouseExited(new EventHandler<MouseEvent>() {
-            public void handle(MouseEvent arg0) {
-                login.setTextFill(Color.BLACK);
-            }
-        });
+        login.setOnMouseExited(arg0 -> login.setTextFill(Color.BLACK));
 
-        login.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            public void handle(MouseEvent arg0) {
-                if (!tf.getText().equals(ConfigProvider.getInstance().getProperty("ADMIN_USERNAME")) || !pw.getText().equals(ConfigProvider.getInstance().getProperty("ADMIN_PASSWORD"))) {
-                    errorText.setVisible(true);
-                } else {
-                    InterfacciaAzioni azioni = new InterfacciaAzioni(primaryStage);
-                    scene.setRoot(azioni.getRoot());
-                }
+        login.setOnMouseClicked(arg0 -> {
+            if (!tf.getText().equals(ConfigProvider.getInstance().getProperty("ADMIN_USERNAME")) || !pw.getText().equals(ConfigProvider.getInstance().getProperty("ADMIN_PASSWORD"))) {
+                alert.showAndWait();
+            } else {
+                new InterfacciaAzioni(primaryStage);
             }
         });
 
