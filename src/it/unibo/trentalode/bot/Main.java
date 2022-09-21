@@ -17,7 +17,7 @@ public class Main {
             throw new RuntimeException(e);
         }
 
-        tlb.persistFeedRSS();
+        IOManager.persistFeedRSS();
         tlb.importCSV(ConfigProvider.getInstance().getProperty("CSV_PATH"));
     }
 }

@@ -9,19 +9,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="93cb590f-07d5-4d98-a394-a28b385adde1" name="Changes" comment=":sparkles: Enables the user to start the bot from the admin UI">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+    <list default="true" id="93cb590f-07d5-4d98-a394-a28b385adde1" name="Changes" comment=":bug: Applies minor patches">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/AggiungiNotiziaSuDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/AggiungiNotiziaSuDB.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/CreaUtente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/CreaUtente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/InterfacciaAccessoAdmin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/InterfacciaAccessoAdmin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/AssegnaCategoriaANotizia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/AssegnaCategoriaANotizia.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/ImportaNotizieDaFeed.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/ImportaNotizieDaFeed.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/InterfacciaAzioni.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/InterfacciaAzioni.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/RimuoviNotiziaDaDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/RimuoviNotiziaDaDB.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/SelezionaUtenteDaModificare.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/SelezionaUtenteDaModificare.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/SelezionaUtenteDaRimuovere.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/SelezionaUtenteDaRimuovere.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/News.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/News.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/IOManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/IOManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/TrentaELodeBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/TrentaELodeBot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/UserList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/UsersRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -144,6 +141,7 @@
       <workItem from="1663704828185" duration="4005000" />
       <workItem from="1663713486451" duration="2416000" />
       <workItem from="1663745638581" duration="3342000" />
+      <workItem from="1663762303268" duration="2150000" />
     </task>
     <task id="LOCAL-00001" summary=":memo: Adds JavaDoc">
       <created>1663714076719</created>
@@ -159,7 +157,14 @@
       <option name="project" value="LOCAL" />
       <updated>1663715770458</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary=":bug: Applies minor patches">
+      <created>1663762340031</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1663762340031</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -179,7 +184,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value=":memo: Adds JavaDoc" />
     <MESSAGE value=":sparkles: Enables the user to start the bot from the admin UI" />
-    <option name="LAST_COMMIT_MESSAGE" value=":sparkles: Enables the user to start the bot from the admin UI" />
+    <MESSAGE value=":bug: Applies minor patches" />
+    <option name="LAST_COMMIT_MESSAGE" value=":bug: Applies minor patches" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

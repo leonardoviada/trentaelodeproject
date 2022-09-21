@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -54,19 +55,13 @@ public class SelezionaUtenteDaRimuovere {
         Button bottoneRimuovi = new Button("Rimuovi utente");
         root.getChildren().add(bottoneRimuovi);
 
-        Text rimosso = new Text("Utente rimosso");
-        root.getChildren().add(rimosso);
-        rimosso.setVisible(false);
-
-
-        bottoneRimuovi.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-            @Override
-            public void handle(MouseEvent arg0) {
-                utenti.remove(menuUtenti.getSelectionModel().getSelectedItem());
-                rimosso.setVisible(true);
-            }
+        bottoneRimuovi.setOnMouseClicked(arg0 -> {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Stato operazione");
+            alert.setHeaderText("Utente eliminato");
+            alert.showAndWait();
         });
+
         Button tornaIndietro = new Button("Torna al menu iniziale");
         root.getChildren().add(tornaIndietro);
 

@@ -1,15 +1,19 @@
 package it.unibo.trentalode.admin;
 
 import it.unibo.trentalode.bot.Categories;
+import it.unibo.trentalode.bot.IOManager;
+import it.unibo.trentalode.bot.News;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.util.Collection;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -24,12 +28,13 @@ public class AssegnaCategoriaANotizia {
         Text scegliNotizia = new Text("Seleziona la notizia a cui assegnare la categoria");
         root.getChildren().add(scegliNotizia);
 
-        ObservableList<String> notizie = FXCollections.observableArrayList(
-                "notizia1", "notizia2", "notizia3");
-        ListView<String> menuNotizie = new ListView<>(notizie);
-        menuNotizie.setEditable(true);
-        menuNotizie.setMaxSize(200, 150);
+        Collection<News> values = IOManager.getNewsByCategory(Categories.LATEST_NEWS).values();
+        Stream<News> newsStream = values.stream();
+        ObservableList<String> titoli = FXCollections.observableArrayList(newsStream.map(News::getTitle).collect(Collectors.toList()));
+        ListView<String> menuNotizie = new ListView<String>(titoli);
         root.getChildren().add(menuNotizie);
+        menuNotizie.setEditable(true);
+        menuNotizie.setMaxSize(600, 400);
 
 
         Text scegliCategoria = new Text("Seleziona la categoria da assegnare");
@@ -41,6 +46,7 @@ public class AssegnaCategoriaANotizia {
                         .map(Enum::name)
                         .collect(Collectors.toList())
         );
+
         ListView<String> menuCategorie = new ListView<>(categorie);
         menuCategorie.setEditable(true);
         menuCategorie.setMaxSize(200, 150);
@@ -49,12 +55,12 @@ public class AssegnaCategoriaANotizia {
 
         Button assegnaCategoria = new Button("Assegna Categoria");
         root.getChildren().add(assegnaCategoria);
-        Text assegnata = new Text("Categoria assegnata");
-        assegnata.setVisible(false);
-        root.getChildren().add(assegnata);
 
         assegnaCategoria.setOnMouseClicked(it -> {
-            assegnata.setVisible(true);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Stato operazione");
+            alert.setHeaderText("Categoria associata aggiornata");
+            alert.showAndWait();
         });
 
         Button tornaIndietro = new Button("Torna al menu iniziale");
