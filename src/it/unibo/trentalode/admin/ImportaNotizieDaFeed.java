@@ -1,11 +1,9 @@
 package it.unibo.trentalode.admin;
 
 import it.unibo.trentalode.bot.IOManager;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -43,14 +41,9 @@ public class ImportaNotizieDaFeed {
         Button tornaIndietro = new Button("Torna al menu iniziale");
         root.getChildren().add(tornaIndietro);
 
-        tornaIndietro.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-            @Override
-            public void handle(MouseEvent arg0) {
-                InterfacciaAzioni interfaccia = new InterfacciaAzioni(primaryStage);
-                primaryStage.getScene().setRoot(interfaccia.getRoot());
-
-            }
+        tornaIndietro.setOnMouseClicked(arg0 -> {
+            InterfacciaAzioni interfaccia = new InterfacciaAzioni(primaryStage);
+            primaryStage.getScene().setRoot(interfaccia.getRoot());
         });
 
     }
