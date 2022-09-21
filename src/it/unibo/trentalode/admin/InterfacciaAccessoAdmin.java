@@ -59,7 +59,7 @@ public class InterfacciaAccessoAdmin extends Application {
         errorText.setVisible(false);
         root.getChildren().add(errorText);
 
-        Scene scene = new Scene(root, 300, 300);
+        Scene scene = new Scene(root, 800, 500);
         primaryStage.setTitle("Login admin");
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);
@@ -87,7 +87,7 @@ public class InterfacciaAccessoAdmin extends Application {
                 }
             }
         });
-        
+
         primaryStage.show();
     }
 }

@@ -16,11 +16,11 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-public class UserList {
+public class UsersRepository {
     String path;
     private HashMap<String, User> userMap; //ogni chiave è l'username
 
-    public UserList(String path) {
+    public UsersRepository(String path) {
         userMap = new HashMap<>();
         this.path = path;
         update();

@@ -2,12 +2,13 @@ package it.unibo.trentalode.admin;
 
 import it.unibo.trentalode.ConfigProvider;
 import it.unibo.trentalode.bot.TrentaELodeBot;
-import it.unibo.trentalode.bot.UserList;
+import it.unibo.trentalode.bot.UsersRepository;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Separator;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -28,12 +29,17 @@ public class InterfacciaAzioni {
         elencoAzioni.getChildren().add(errore);
         try {
             elencoAzioni.setSpacing(7.5);
+            Text title = new Text("Admin Naboo - Pannello di controllo");
+            Separator hSep = new Separator();
 
-            Text title = new Text("Benvenuto! Queste sono le azioni disponibili");
             elencoAzioni.getChildren().add(title);
+            elencoAzioni.getChildren().add(hSep);
 
-            Button avviaBot = new Button("AVVIA BOT");
+
+            Button avviaBot = new Button("Avvia Bot Telegram");
+            Separator hSep2 = new Separator();
             elencoAzioni.getChildren().add(avviaBot);
+            elencoAzioni.getChildren().add(hSep2);
 
             Button aggiungiNotiziaSuDB = new Button("Aggiungi manualmente notizia sul Database");
             elencoAzioni.getChildren().add(aggiungiNotiziaSuDB);
@@ -70,7 +76,7 @@ public class InterfacciaAzioni {
 
             elencoAzioni.setAlignment(Pos.CENTER);
 
-            Scene scene = new Scene(elencoAzioni, 400, 400);
+            Scene scene = new Scene(elencoAzioni, 800, 500);
             primaryStage.setTitle("Interfaccia Admin");
             primaryStage.setScene(scene);
             primaryStage.setResizable(false);
@@ -95,10 +101,10 @@ public class InterfacciaAzioni {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Gestione bot");
                     alert.setHeaderText("Bot avviato");
-                    alert.setContentText("E' ora possibile interagire con il sistema via Telegram");
-
+                    alert.setContentText("E' ora possibile interagire con il sistema via Telegram. L'ascolto verrà terminato alla chiusura del pannello di controllo.");
                     alert.showAndWait();
-                    avviaBot.setText("BOT AVVIATO");
+
+                    avviaBot.setText("Bot Avviato");
                     avviaBot.setDisable(true);
                 }
             });
@@ -197,7 +203,7 @@ public class InterfacciaAzioni {
 
                 @Override
                 public void handle(MouseEvent arg0) {
-                    CreaUtente creaUtente = new CreaUtente(primaryStage, new UserList(ConfigProvider.getInstance().getProperty("USERS_PATH")));
+                    CreaUtente creaUtente = new CreaUtente(primaryStage, new UsersRepository(ConfigProvider.getInstance().getProperty("USERS_PATH")));
                     scene.setRoot(creaUtente.getRoot());
                 }
             });

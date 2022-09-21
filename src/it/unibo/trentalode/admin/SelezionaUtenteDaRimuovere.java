@@ -2,7 +2,7 @@ package it.unibo.trentalode.admin;
 
 import it.unibo.trentalode.ConfigProvider;
 import it.unibo.trentalode.bot.User;
-import it.unibo.trentalode.bot.UserList;
+import it.unibo.trentalode.bot.UsersRepository;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -20,7 +20,7 @@ public class SelezionaUtenteDaRimuovere {
 
     public SelezionaUtenteDaRimuovere(Stage primaryStage) {
 
-        UserList listaUser = new UserList(ConfigProvider.getInstance().getProperty("USERS_PATH"));
+        UsersRepository listaUser = new UsersRepository(ConfigProvider.getInstance().getProperty("USERS_PATH"));
         listaUser.update();
 
         root = new VBox();

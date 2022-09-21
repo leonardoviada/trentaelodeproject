@@ -1,7 +1,7 @@
 package it.unibo.trentalode.admin;
 
 import it.unibo.trentalode.bot.User;
-import it.unibo.trentalode.bot.UserList;
+import it.unibo.trentalode.bot.UsersRepository;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 public class CreaUtente {
     private final VBox root;
 
-    CreaUtente(Stage primaryStage, UserList listaUtenti) {
+    CreaUtente(Stage primaryStage, UsersRepository listaUtenti) {
         root = new VBox();
         root.setAlignment(Pos.CENTER);
         root.setSpacing(7.5);

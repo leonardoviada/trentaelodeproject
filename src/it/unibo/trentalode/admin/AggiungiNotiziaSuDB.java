@@ -20,7 +20,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class AggiungiNotiziaSuDB {
-
     private final VBox root;
 
     AggiungiNotiziaSuDB(Stage primaryStage) {

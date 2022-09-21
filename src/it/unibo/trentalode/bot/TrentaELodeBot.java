@@ -27,13 +27,13 @@ import java.util.*;
 public class TrentaELodeBot extends TelegramLongPollingBot {
 
     private static TrentaELodeBot instance;
-    private final UserList userMap;
+    private final UsersRepository userMap;
     private final HashMap<Categories, String> feedRSSMap = new HashMap<>();
     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
     protected TrentaELodeBot(String pathUser, String pathFeedRSS) {
         super();
-        userMap = new UserList(pathUser);
+        userMap = new UsersRepository(pathUser);
         uploadFeedRSSMap(pathFeedRSS);
     }
 

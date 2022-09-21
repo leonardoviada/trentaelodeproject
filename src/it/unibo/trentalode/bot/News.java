@@ -193,6 +193,7 @@ public class News {
             fw = new FileWriter(this.getCategories().label, true);
             pw = new PrintWriter(fw);
             pw.println(this.toJson());
+            System.out.println("Notizia " + this.getTitle() + " aggiunta");
         } catch (IOException e) {
             System.out.println("Percorso file non valido");
         } finally {
