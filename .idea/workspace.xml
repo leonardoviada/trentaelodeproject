@@ -9,25 +9,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="93cb590f-07d5-4d98-a394-a28b385adde1" name="Changes" comment=":art: Improves code structure and drops unused features">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/jackson_databind_2_13_4.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/jackson_dataformat_csv_2_9_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/trentaelodeproject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/trentaelodeproject.iml" afterDir="false" />
+    <list default="true" id="93cb590f-07d5-4d98-a394-a28b385adde1" name="Changes" comment=":lipstick: Applies minor UI updates and patches">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/config.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unibo/trentalode/ConfigProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/ConfigProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/InterfacciaAccessoAdmin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/InterfacciaAccessoAdmin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/InterfacciaAzioni.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/InterfacciaAzioni.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/SelezionaUtenteDaModificare.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/SelezionaUtenteDaModificare.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/SelezionaUtenteDaRimuovere.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/SelezionaUtenteDaRimuovere.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/Categories.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/Categories.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/Commands.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/IOManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/IOManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/News.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/News.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/AggiungiNotiziaSuDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/admin/AggiungiNotiziaSuDB.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/TrentaELodeBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/TrentaELodeBot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/UsersRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unibo/trentalode/bot/UsersRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -156,7 +142,7 @@
       <workItem from="1663704828185" duration="4005000" />
       <workItem from="1663713486451" duration="2416000" />
       <workItem from="1663745638581" duration="3342000" />
-      <workItem from="1663762303268" duration="5472000" />
+      <workItem from="1663762303268" duration="6949000" />
     </task>
     <task id="LOCAL-00001" summary=":memo: Adds JavaDoc">
       <created>1663714076719</created>
@@ -186,7 +172,14 @@
       <option name="project" value="LOCAL" />
       <updated>1663764833224</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary=":lipstick: Applies minor UI updates and patches">
+      <created>1663768281829</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1663768281829</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -208,7 +201,8 @@
     <MESSAGE value=":sparkles: Enables the user to start the bot from the admin UI" />
     <MESSAGE value=":bug: Applies minor patches" />
     <MESSAGE value=":art: Improves code structure and drops unused features" />
-    <option name="LAST_COMMIT_MESSAGE" value=":art: Improves code structure and drops unused features" />
+    <MESSAGE value=":lipstick: Applies minor UI updates and patches" />
+    <option name="LAST_COMMIT_MESSAGE" value=":lipstick: Applies minor UI updates and patches" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -39,9 +39,8 @@ public class TrentaELodeBot extends TelegramLongPollingBot {
      * invoca manageCommands() per interpretare il messagio ricevuto ed eseguire azioni
      */
     public void onUpdateReceived(Update update) {
-        if (update.hasMessage() && update.getMessage().hasText()) {
+        if (update.hasMessage() && update.getMessage().hasText())
             manageCommands(update);
-        }
     }
 
     @Override
@@ -63,12 +62,12 @@ public class TrentaELodeBot extends TelegramLongPollingBot {
     public void sendMessageToUser(long chat_id, News news, boolean commentable) {
         SendMessage message = new SendMessage();
         message.setChatId(Long.toString(chat_id));
-        message.setText(news.toString()); //news.toString restituisce il testo già formattato per essere spedito all'utente via telegram (vedi classe News)
-        if (commentable) {
+        message.setText(news.toString()); // news.toString restituisce il testo già formattato per essere spedito all'utente via telegram (vedi classe News)
+        if (commentable)
             addButtons(message, news); //aggiunge i 3 bottoni al messaggio; passiamo anche l'attributo news perché ci serve l'id ella notizia da inserire nel testo originato alla presione dei bottoni
-        }
+
         try {
-            execute(message); // Call method to send the message
+            execute(message);
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
@@ -101,15 +100,19 @@ public class TrentaELodeBot extends TelegramLongPollingBot {
                 sendMessageToUser(update.getMessage().getChatId(), "Utente già registrato");
                 return;
             }
+
             String name = update.getMessage().getChat().getUserName();
-            //TODO: Persistere anche il chatId in modo tale da consentire l'invio notifiche massimo su lista utenti
             userMap.getUserList().putIfAbsent(name, new User(name));
             userMap.persist();
             sendMessageToUser(update.getMessage().getChatId(), "Nuovo utente registrato correttamente!");
+
         } else if (text.charAt(0) == '/') {
             HashMap<String, News> newsMap;
             Iterator it;
             switch (text) {
+                case "/start":
+                    sendMessageToUser(update.getMessage().getChatId(), "Benvenuto in 30L bot!");
+                    return;
                 case "/politica":
                     newsMap = IOManager.getNewsByCategory(Categories.POLITICS);
                     it = newsMap.entrySet().iterator();
@@ -188,7 +191,7 @@ public class TrentaELodeBot extends TelegramLongPollingBot {
             }
         }
 
-        //sintassi per commento: <id=1234><commento>testo
+        // sintassi per commento: <id=1234><commento>testo
         else if (text.contains("<commento>") && text.contains("<id=")) {
             String s = text.substring(19, text.indexOf(">") + 1);
             CharSequence char_id = s.subSequence(4, s.length() - 1);
@@ -201,7 +204,7 @@ public class TrentaELodeBot extends TelegramLongPollingBot {
             sendMessageToUser(update.getMessage().getChatId(), "Commento inserito correttamente");
         }
 
-        //sintassi per rating: <id=1234><voto>6,5
+        // sintassi per rating: <id=1234><voto>6,5
         else if (text.contains("<voto>") && text.contains("<id=")) {
             text = text.replace(',', '.');
             String s = text.substring(19, text.indexOf(">") + 1);
@@ -289,7 +292,6 @@ public class TrentaELodeBot extends TelegramLongPollingBot {
         rowInline.add(commenta);
         rowInline.add(vota);
         rowInline1.add(vediCommenti);
-
 
         rowsInline.add(rowInline);
         rowsInline.add(rowInline1);

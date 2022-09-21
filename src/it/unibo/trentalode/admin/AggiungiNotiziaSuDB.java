@@ -4,12 +4,10 @@ import it.unibo.trentalode.bot.Categories;
 import it.unibo.trentalode.bot.News;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -28,7 +26,6 @@ public class AggiungiNotiziaSuDB {
         root.setSpacing(7.5);
 
         try {
-
             Text inserisciTitolo = new Text("Inserisci il titolo della notizia");
             root.getChildren().add(inserisciTitolo);
 
@@ -64,6 +61,7 @@ public class AggiungiNotiziaSuDB {
                             .map(Enum::name)
                             .collect(Collectors.toList())
             );
+
             ListView<String> menuCategorie = new ListView<>(categorie);
             root.getChildren().add(menuCategorie);
             menuCategorie.setMaxSize(200, 100);
@@ -75,7 +73,7 @@ public class AggiungiNotiziaSuDB {
             root.getChildren().add(aggiunta);
 
             creaNotizia.setOnMouseClicked(it -> {
-                News news = new News(123, campoAutore.getText(), campoTitolo.getText(), campoCorpo.getText(), campoFonte.getText(), "https://corriere.it", Categories.LATEST_NEWS, new Date(2022, Calendar.SEPTEMBER, 21));
+                News news = new News(123, campoAutore.getText(), campoTitolo.getText(), campoCorpo.getText(), campoFonte.getText(), "https://corriere.it", Categories.valueOf(menuCategorie.getSelectionModel().getSelectedItem()), new Date(2022, Calendar.SEPTEMBER, 21));
                 aggiunta.setVisible(true);
                 news.persist();
             });
@@ -83,35 +81,18 @@ public class AggiungiNotiziaSuDB {
             Button tornaIndietro = new Button("Torna al menu iniziale");
             root.getChildren().add(tornaIndietro);
 
-
-            tornaIndietro.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-                @Override
-                public void handle(MouseEvent arg0) {
-                    InterfacciaAzioni interfaccia = new InterfacciaAzioni(primaryStage);
-                    primaryStage.getScene().setRoot(interfaccia.getRoot());
-
-
-                }
-
+            tornaIndietro.setOnMouseClicked(arg0 -> {
+                InterfacciaAzioni interfaccia = new InterfacciaAzioni(primaryStage);
+                primaryStage.getScene().setRoot(interfaccia.getRoot());
             });
-
             root.setAlignment(Pos.CENTER);
 
-
         } catch (Exception e) {
-
             e.printStackTrace();
         }
-
-
-        //id(long), title, corpo, author TUTTO STRINGA, data Date, source String, categoria Categoria
-
     }
 
     public VBox getRoot() {
         return root;
     }
-
-
 }
